@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'IBM_VGA';
+    src: url('/fonts/Web437_IBM_VGA_9x14.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Sysfont';
+    src: url('/fonts/sysfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+html {
+    font-family: 'IBM_VGA', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: black;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+
+}
+
+.macos {
+    font-family: 'Sysfont', sans-serif;
+}
