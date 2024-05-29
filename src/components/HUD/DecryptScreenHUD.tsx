@@ -1,14 +1,14 @@
-import { DialogueText } from "./DialogueText";
 import { DialogueBtn } from "./DialogueBtn";
+import { DialogueText } from "./DialogueText";
 
-export function IntroHUD({
+export function DecryptScreenHUD({
   pointerLockSelector,
 }: {
   pointerLockSelector: string;
 }) {
   return (
     <div>
-      <DialogueText text={"This is the first Scene"} />
+      <DialogueText text={"This is the Decrypt Scene"} />
       <DialogueBtn pointerLockSelector={pointerLockSelector} text="EXIT" />
     </div>
   );

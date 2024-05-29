@@ -10,7 +10,7 @@ export function CrossHair() {
     >
       <path
         d="M0 23.7714V17.8286H18V0H30V17.8286H48V23.7714H30V41.6H18V23.7714H0Z"
-        fill="#ffffff33"
+        fill="#ffffff88"
       />
     </svg>
   );

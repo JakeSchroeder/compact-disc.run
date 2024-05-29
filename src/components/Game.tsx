@@ -1,10 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { BaseSceneModel } from "./BaseSceneModel";
-import {
-  KeyboardControls,
-  PerspectiveCamera,
-  PointerLockControls,
-} from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { allScenesList } from "../lib/sceneUIData";
 import { useSceneStore } from "../stores/SceneStore";
@@ -14,51 +10,43 @@ import { Lights } from "./Lights";
 import { CrossHair } from "./HUD/CrossHair";
 import { Artifacts } from "./Artifacts";
 import { EffectComposer } from "@react-three/postprocessing";
+import { Controls } from "./Controls/Controls";
+import { PointerControls } from "./Controls/PointerControls";
 
 export function Game() {
-  const currentSceneIndex = useSceneStore((state) => state.currentSceneIndex);
-  const HUD = allScenesList[currentSceneIndex].HUD;
-  // const Artifact = allScenesList[currentSceneIndex].artifact;
+  const { currentSceneIndex, setIsHovering } = useSceneStore((state) => state);
+  const { HUD, inventoryHUDProps, pointerLockSelector, cameraProps, isPlayer } =
+    allScenesList[currentSceneIndex];
+
   return (
     <div id="canvas-container" className="w-full h-full relative">
-      <KeyboardControls
-        map={[
-          { name: "forward", keys: ["ArrowUp", "w", "W"] },
-          { name: "backward", keys: ["ArrowDown", "s", "S"] },
-          { name: "left", keys: ["ArrowLeft", "a", "A"] },
-          { name: "right", keys: ["ArrowRight", "d", "D"] },
-          { name: "jump", keys: ["Space"] },
-          { name: "zoom", keys: ["Keyctrl"] },
-        ]}
-      >
+      <Controls>
         <HUD
-          pointerLockSelector={
-            allScenesList[currentSceneIndex].pointerLockSelector
-          }
+          inventoryHUDProps={inventoryHUDProps}
+          pointerLockSelector={pointerLockSelector}
         />
-        {allScenesList[currentSceneIndex].isPlayer && <CrossHair />}
+        {isPlayer && <CrossHair />}
         <Canvas className="w-full h-full relative">
           <EffectComposer autoClear={false}>
             <PostProcessing />
             <Physics gravity={[0, -30, 0]}>
-              <PerspectiveCamera
-                {...allScenesList[currentSceneIndex].cameraProps}
+              <PerspectiveCamera makeDefault {...cameraProps} />
+              <Artifacts
+                setIsHovering={setIsHovering}
+                currentSceneIndex={currentSceneIndex}
               />
-              <Artifacts currentSceneIndex={currentSceneIndex} />
+
+              {isPlayer && <Player />}
               <BaseSceneModel />
-              {allScenesList[currentSceneIndex].isPlayer && <Player />}
             </Physics>
-            <PointerLockControls
-              selector={
-                allScenesList[currentSceneIndex].isPointerLocked === true
-                  ? undefined
-                  : allScenesList[currentSceneIndex].title
-              }
+            <PointerControls
+              isPlayer={isPlayer}
+              pointerLockSelector={pointerLockSelector}
             />
             <Lights />
           </EffectComposer>
         </Canvas>
-      </KeyboardControls>
+      </Controls>
     </div>
   );
 }
