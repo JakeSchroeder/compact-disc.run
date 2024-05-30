@@ -1,8 +1,7 @@
-import { Game } from "./components/Game";
 import { LoadingScreen } from "./components/LoadingScreen";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 
-// const Game = lazy(() => import("./components/Game"));
+const Game = lazy(() => import("./components/Game"));
 
 function App() {
   return (

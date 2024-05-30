@@ -10,9 +10,11 @@ import { MacOS } from "./MacOS";
 import { ScreenSaver } from "./ScreenSaver";
 
 export function Artifacts({
+  currentSceneTitle,
   currentSceneIndex,
   setIsHovering,
 }: {
+  currentSceneTitle: string;
   currentSceneIndex: number;
   setIsHovering: (setIsHovering: boolean) => void;
 }) {
@@ -67,9 +69,7 @@ export function Artifacts({
       />
       {nodeListRef.current.map((node, index) => (
         <Fragment key={index}>
-          {node.html &&
-            allScenesList[currentSceneIndex].title === node.sceneTitle &&
-            node.html}
+          {node.html && currentSceneTitle === node.sceneTitle && node.html}
           {node.geometry && (
             <mesh
               ref={node.ref}
@@ -77,9 +77,7 @@ export function Artifacts({
               geometry={node.geometry}
               material={materials.environment}
               onPointerOver={() => {
-                if (
-                  allScenesList[currentSceneIndex].title === node.sceneTitle
-                ) {
+                if (currentSceneTitle === node.sceneTitle) {
                   setCurrentHoveredArtifact(node.ref);
                   setIsHovering(true);
                 }

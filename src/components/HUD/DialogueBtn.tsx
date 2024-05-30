@@ -5,7 +5,7 @@ export function DialogueBtn({
   text,
   pointerLockSelector,
 }: {
-  pointerLockSelector: string;
+  pointerLockSelector: string | undefined;
   text: string | undefined;
 }) {
   const { currentSceneIndex, setCurrentSceneIndex } = useSceneStore(
@@ -17,13 +17,12 @@ export function DialogueBtn({
       className="absolute top-8 left-8 z-10 text-white"
     >
       <button
-        id="desk-screen"
-        className="px-8 py-4 bg-black bg-opacity-70 flex items-center space-x-4"
+        className="text-sm py-4 px-8 bg-black bg-opacity-70 flex items-center space-x-4"
         onClick={() => {
           setCurrentSceneIndex(currentSceneIndex + 1);
         }}
       >
-        <img src={backIcon} alt="Back to room" className="w-8 h-8" />
+        <img src={backIcon} alt="Back to room" className="w-5 h-5" />
         <span>{text}</span>
       </button>
     </div>

@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { useSceneStore } from "../stores/SceneStore";
 
 export function LoadingScreen() {
-  const setCurrentSceneIndex = useSceneStore(
-    (state) => state.setCurrentSceneIndex
-  );
+  // const setCurrentSceneIndex = useSceneStore(
+  //   (state) => state.setCurrentSceneIndex
+  // );
 
-  useEffect(() => {
-    return () => {
-      setCurrentSceneIndex(0);
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     setCurrentSceneIndex(0);
+  //   };
+  // }, []);
 
   return (
     <div className="text-white relative space-y-40 w-full h-full flex flex-col justify-center items-center">

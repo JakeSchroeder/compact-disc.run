@@ -1,10 +1,20 @@
 import { Html } from "@react-three/drei";
-import { CSSProperties, Fragment, useRef, useState } from "react";
+import { CSSProperties, Fragment, useState } from "react";
 
 //FUTURE: add current date time subtract by 10 minutes.
-const readme = `
-  - If you are reading this then... the Internet Wormhole Experiment worked! Atleast partly, it seems you will be stuck in there forever if we cant find a way out... uh oh! \n\n Take a look around and see what you can find out, maybe theres a code to that door? 
- `;
+const readme = (
+  <p className="">
+    If you are reading this... well by god, the inter dimensional load balancer
+    worked! <br />
+    <br />
+    Or shall I say, sort of worked... It seems, you are stuck in there and I
+    don't have anyway to reboot the servers. There is a door in the back but its
+    locked and needs a pin.
+    <br />
+    <br />
+    There has got to be the pin number laying around here somewhere...
+  </p>
+);
 
 export function MacOS() {
   const [currentPopover, setCurrentPopover] = useState({
@@ -196,7 +206,7 @@ export function MacOS() {
                   </header>
                   <div className="border border-[--border] w-full">
                     <div className="border border-black w-full">
-                      <div className="bg-white w-full text-2xl whitespace-pre-wrap px-4">
+                      <div className="bg-white w-full text-2xl whitespace-pre-wrap p-4">
                         {readme}
                       </div>
                     </div>

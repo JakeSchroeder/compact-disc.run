@@ -4,19 +4,19 @@ import { Inventory } from "./Inventory";
 
 export function InventoryHUD({
   pointerLockSelector,
-  inventoryHUDProps,
+  hudProps,
 }: {
-  inventoryHUDProps: any;
   pointerLockSelector: string;
+  hudProps: any;
 }) {
   return (
     <div>
       <DialogueBtn
         pointerLockSelector={pointerLockSelector}
-        text="Exit Diary"
+        text={hudProps.dialogueBtnText}
       />
-      <DialogueText text={"This is the INVENTORY Scene"} />
-      <Inventory inventoryHUDProps={inventoryHUDProps} />
+      <DialogueText text={"Read the Diary and the next clue."} />
+      <Inventory {...hudProps} />
     </div>
   );
 }
