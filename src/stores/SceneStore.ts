@@ -7,7 +7,7 @@ export interface ISceneStore {
   setIsHovering: (setIsHovering: boolean) => void;
 }
 
-export const useSceneStore = create<ISceneStore>((set, get) => ({
+export const useSceneStore = create<ISceneStore>((set) => ({
   currentSceneIndex: 0,
   setCurrentSceneIndex: (sceneIndex: number) => set(() => ({ currentSceneIndex: sceneIndex })),
   isHovering: false,
