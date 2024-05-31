@@ -1,8 +1,7 @@
 import { useGLTF } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import { KTX2Loader } from "three/examples/jsm/Addons.js";
-import { InstancedMesh, Mesh } from "three";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
@@ -11,7 +10,6 @@ import { ScreenSaver } from "./ScreenSaver";
 
 export function Artifacts({
   currentSceneTitle,
-  currentSceneIndex,
   setIsHovering,
 }: {
   currentSceneTitle: string;
@@ -20,10 +18,9 @@ export function Artifacts({
 }) {
   const { gl } = useThree();
 
-  //TODO: reexport with all transforms applied.
   const { nodes, materials } = useGLTF(
-    "/models/scene.glb",
-    false,
+    "/models/scene-draco-ktx.glb",
+    true,
     false,
     (loader) => {
       const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);

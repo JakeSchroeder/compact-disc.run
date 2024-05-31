@@ -5,11 +5,9 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 export function BaseSceneModel() {
   const { gl } = useThree();
-  //I think the above fallback in suspense works
-  //because useGLTF is a hook that throws a promise
   const { nodes, materials } = useGLTF(
-    "/models/scene.glb",
-    false,
+    "/models/scene-draco-ktx.glb",
+    true,
     false,
     (loader) => {
       const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
