@@ -1,4 +1,5 @@
 import { CrossHair } from "./CrossHair";
+import { EndScreenHUD } from "./EndScreenHUD";
 import { InventoryHUD } from "./InventoryHUD";
 import { KeypadHUD } from "./KeypadHUD";
 import { PlayerHUD } from "./PlayerHUD";
@@ -30,6 +31,9 @@ export function HUDController({
       )}
       {hudProps.type === "KeypadHUD" && (
         <KeypadHUD pointerLockSelector={currentSceneTitle} />
+      )}
+      {hudProps.type === "EndScreenHUD" && (
+        <EndScreenHUD pointerLockSelector={currentSceneTitle} />
       )}
     </>
   );

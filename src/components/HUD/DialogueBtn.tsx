@@ -5,7 +5,7 @@ export function DialogueBtn({
   text,
   pointerLockSelector,
 }: {
-  pointerLockSelector: string | undefined;
+  pointerLockSelector?: string | undefined;
   text: string | undefined;
 }) {
   const { currentSceneIndex, setCurrentSceneIndex } = useSceneStore(

@@ -35,7 +35,8 @@ export const allScenesList: TScene[] = [
     title: "DIARY",
     hudProps: {
       type: "PlayerHUD",
-      dialogueText: "Objective: Read the readme.txt on the Apple iMac",
+      dialogueText:
+        "Objective: Look for the leather-bound book of secrets.\n It rests by the plastic apple.",
       dialogueHoverText: "Press F to interact [DIARY]",
     },
     cameraProps: {
@@ -73,7 +74,7 @@ export const allScenesList: TScene[] = [
       type: "PLAYER",
     },
     isPlayer: true,
-    model: "picture_frame",
+    model: "photo",
   },
   {
     title: "PHOTO_INVENTORY",
@@ -103,7 +104,7 @@ export const allScenesList: TScene[] = [
       type: "PLAYER",
     },
     isPlayer: true,
-    model: "game",
+    model: "sly_cooper",
   },
   {
     title: "SLY_COOPER_INVENTORY",
@@ -165,7 +166,7 @@ export const allScenesList: TScene[] = [
       type: "PLAYER",
     },
     isPlayer: true,
-    model: "gun",
+    model: "military",
   },
   {
     title: "MILITARY_INVENTORY",
@@ -183,14 +184,13 @@ export const allScenesList: TScene[] = [
       type: "PLAYER",
     },
   },
-
   {
-    title: "GEE",
+    title: "JIU_JITSU",
     hudProps: {
       type: "PlayerHUD",
       dialogueText:
         "Objective: Find the martial art of grappling, practiced where strength and technique begin.",
-      dialogueHoverText: "Press F to interact [GEE]",
+      dialogueHoverText: "Press F to interact [JIU_JITSU]",
     },
     cameraProps: {
       type: "PLAYER",
@@ -338,7 +338,6 @@ export const allScenesList: TScene[] = [
       type: "PLAYER",
     },
   },
-
   {
     title: "MUSIC",
     hudProps: {
@@ -482,6 +481,8 @@ export const allScenesList: TScene[] = [
     title: "DECRYPTSCREEN",
     hudProps: {
       type: "PlayerHUD",
+      dialogueText: "Objective: Read the readme.txt on the Apple iMac",
+      dialogueBtnText: "EXIT to Room",
     },
     cameraProps: {
       type: "DESK",
@@ -506,7 +507,7 @@ export const allScenesList: TScene[] = [
   {
     title: "KEYPADSCREEN",
     hudProps: {
-      type: "KeyPadHUD",
+      type: "KeypadHUD",
     },
     cameraProps: {
       type: "PLAYER",
@@ -520,6 +521,5 @@ export const allScenesList: TScene[] = [
     cameraProps: {
       type: "STARTSCREEN",
     },
-    html: "screensaver",
   },
 ];

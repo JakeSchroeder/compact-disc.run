@@ -20,7 +20,8 @@ export function CameraController({ cameraProps }: { cameraProps: any }) {
         />
       )}
       {cameraProps.type === "PLAYER" && (
-        <PerspectiveCamera makeDefault fov={90} />
+        <></>
+        // <PerspectiveCamera makeDefault fov={90} />
       )}
     </>
   );

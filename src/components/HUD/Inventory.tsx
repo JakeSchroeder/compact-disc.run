@@ -1,5 +1,5 @@
-export function Inventory({ inventoryHUDProps }: { inventoryHUDProps: any }) {
-  const { title, year, place, description, clue, nextClue } = inventoryHUDProps;
+export function Inventory({ hudProps }: { hudProps: any }) {
+  const { title, year, place, description, clue, nextClue } = hudProps;
   return (
     <>
       <div className="text-white grid grid-cols-2 absolute p-12 gap-16 z-10 left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[732px] bg-black bg-opacity-90">

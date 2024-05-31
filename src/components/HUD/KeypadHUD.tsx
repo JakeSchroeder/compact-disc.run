@@ -21,7 +21,7 @@ export function KeypadHUD({
   return (
     <div
       id={pointerLockSelector}
-      className="absolute w-[450px] h-[500px] bg-black bg-opacity-80 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+      className="absolute w-[450px] h-[500px] bg-black bg-opacity-80 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
     >
       <input
         className="w-full border h-32 text-5xl border-white bg-black text-white text-center tracking-widest"

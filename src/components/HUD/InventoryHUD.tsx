@@ -16,7 +16,7 @@ export function InventoryHUD({
         text={hudProps.dialogueBtnText}
       />
       <DialogueText text={"Read the Diary and the next clue."} />
-      <Inventory {...hudProps} />
+      <Inventory hudProps={hudProps} />
     </div>
   );
 }

@@ -77,7 +77,7 @@ export function Artifacts({
               geometry={node.geometry}
               material={materials.environment}
               onPointerOver={() => {
-                if (currentSceneTitle === node.sceneTitle) {
+                if (currentSceneTitle === node.sceneTitle && !node.html) {
                   setCurrentHoveredArtifact(node.ref);
                   setIsHovering(true);
                 }

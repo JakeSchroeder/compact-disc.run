@@ -17,11 +17,12 @@ export function PlayerHUD({
     <div>
       <DialogueHoverText text={dialogueHoverText} />
       <DialogueText text={dialogueText} />
-
-      <DialogueBtn
-        text={dialogueBtnText}
-        pointerLockSelector={pointerLockSelector}
-      />
+      {dialogueBtnText && (
+        <DialogueBtn
+          text={dialogueBtnText}
+          pointerLockSelector={pointerLockSelector}
+        />
+      )}
     </div>
   );
 }

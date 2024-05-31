@@ -39,7 +39,6 @@ export default function Game() {
                 setIsHovering={setIsHovering}
                 currentSceneIndex={currentSceneIndex}
               />
-
               {isPlayer && <Player />}
               <BaseSceneModel />
             </Physics>
