@@ -18,10 +18,10 @@ Points of interest:
 
 Roadmap:
 
-[] Start screen camera transition
-[] FPS desk controls with focus pull
-[] Playable turn table with song list
-[] Original sound track
+- [] Start screen camera transition
+- [] FPS desk controls with focus pull
+- [] Playable turn table with song list
+- [] Original sound track
 
 Aside:
 
