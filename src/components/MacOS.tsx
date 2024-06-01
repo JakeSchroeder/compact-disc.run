@@ -232,7 +232,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                 className={`opacity-100 transition-all duration-1000 ease-in  bg-[--surface] absolute top-4 left-4 w-[520px] border border-black`}
               >
                 <div
-                  className={`px-2 pb-2 border-t w-full  border-white border-l border-r border-r-[--border] border-b border-b-[--border]`}
+                  className={`px-2 pb-2 border-t w-full   border-white border-l border-r border-r-[--border] border-b border-b-[--border]`}
                 >
                   <header className="flex items-center space-x-2 text-sm">
                     <div className="w-full flex flex-col">
@@ -257,9 +257,9 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                         ))}
                     </div>
                   </header>
-                  <div className="border border-[--border] w-full overflow-y-auto">
+                  <div className="border border-[--border] w-full h-full ">
                     <div className="border border-black w-full">
-                      <div className="bg-white w-full text-2xl whitespace-pre-wrap p-4 ">
+                      <div className="bg-white w-full text-2xl h-[400px] whitespace-pre-wrap p-4 overflow-auto">
                         {!showKeyPadPin ? (
                           <>
                             {sceneTitle === "DECRYPT" && decryptReadme}
