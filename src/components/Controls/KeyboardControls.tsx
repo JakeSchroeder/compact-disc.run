@@ -1,11 +1,11 @@
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls as KeyBoardControls } from "@react-three/drei";
 import { useEffect } from "react";
 import { useSceneStore } from "../../stores/SceneStore";
 import { allScenesList } from "../../lib/sceneUIData";
 
-export function Controls({ children }: { children: React.ReactNode }) {
+export function KeyboardControls({ children }: { children: React.ReactNode }) {
   return (
-    <KeyboardControls
+    <KeyBoardControls
       map={[
         { name: "forward", keys: ["ArrowUp", "w", "W"] },
         { name: "backward", keys: ["ArrowDown", "s", "S"] },
@@ -17,7 +17,7 @@ export function Controls({ children }: { children: React.ReactNode }) {
     >
       <FKeyPressed />
       {children}
-    </KeyboardControls>
+    </KeyBoardControls>
   );
 }
 

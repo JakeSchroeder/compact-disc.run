@@ -7,20 +7,40 @@ const readme = (
     If you are reading this... well by god, the inter dimensional load balancer
     worked! <br />
     <br />
-    Or shall I say, sort of worked... It seems, you are stuck in there and I
-    don't have anyway to reboot the servers. There is a door in the back but its
-    locked and needs a pin.
+    Or shall I say, sort of worked... It seems, you are stuck in here and I
+    don't have anyway to reboot the servers and get you out. There is a door in
+    the back but its locked and needs a pin.
     <br />
     <br />
-    There has got to be the pin number laying around here somewhere...
+    There's gotta be a way to get that pin...
   </p>
 );
 
-export function MacOS() {
+const decryptReadme = (
+  <p className="">
+    Good news, I ran some AI event prediction models and it seems like the door
+    pin is hidden in the encrypted file. <br /> <br />
+    We just need to figure out a way to get into it. <br /> <br />
+    Also, worth noting the AI model decided to take a nap halfway through the
+    prediction. And so we had to do a dump of the token state... unfort you will
+    have to manually look for any patterns associated with the data. See if
+    theres any patterns of numbers etc. Who knows these DARPA guys always leave
+    a back door.
+  </p>
+);
+
+const keypadPinReadme = <p>Heres the pin: 1999</p>;
+
+export function MacOS({ sceneTitle }: { sceneTitle: string }) {
   const [currentPopover, setCurrentPopover] = useState({
     title: "",
     show: false,
   });
+
+  const [isDecrypt, setIsDecrypt] = useState(false);
+
+  const [showDecryptPopup, setShowDecryptPopup] = useState(false);
+  const [showKeyPadPin, setShowKeyPadPin] = useState(false);
 
   const surfaceClassNames =
     "bg-[--surface] border-t border-t-white border-b border-b-black shadow-[inset_0_-1px_0_#999999]";
@@ -175,6 +195,39 @@ export function MacOS() {
             </header>
             <main className="w-full h-full relative p-4">
               {/* Window */}
+              {showDecryptPopup === true && (
+                <div
+                  className={`flex flex-col space-y-4 opacity-100 p-2 transition-all duration-1000 ease-in  bg-[--surface] absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 w-[400px] border border-black`}
+                >
+                  <label>Enter Password (numbers only)</label>
+                  <input
+                    type="number"
+                    className="w-full h-10 border border-dotted border-black"
+                    onChange={(e) => {
+                      if (
+                        Number.parseInt(e.target.value) ===
+                        2001200220042008200920102013201420152016201720182022
+                      ) {
+                        setIsDecrypt(true);
+                      }
+                    }}
+                  />
+                  <div className="flex justify-between">
+                    <div>Hint (Password Length: 4 * 15)</div>
+                    <button
+                      className="border border-black px-2 h-8 bg-gray-100"
+                      onClick={() => {
+                        if (isDecrypt) {
+                          setShowDecryptPopup(false);
+                          setShowKeyPadPin(true);
+                        }
+                      }}
+                    >
+                      Unlock .zip
+                    </button>
+                  </div>
+                </div>
+              )}
               <div
                 className={`opacity-100 transition-all duration-1000 ease-in  bg-[--surface] absolute top-4 left-4 w-[520px] border border-black`}
               >
@@ -204,10 +257,17 @@ export function MacOS() {
                         ))}
                     </div>
                   </header>
-                  <div className="border border-[--border] w-full">
+                  <div className="border border-[--border] w-full overflow-y-auto">
                     <div className="border border-black w-full">
-                      <div className="bg-white w-full text-2xl whitespace-pre-wrap p-4">
-                        {readme}
+                      <div className="bg-white w-full text-2xl whitespace-pre-wrap p-4 ">
+                        {!showKeyPadPin ? (
+                          <>
+                            {sceneTitle === "DECRYPT" && decryptReadme}
+                            {sceneTitle === "INTRO" && readme}
+                          </>
+                        ) : (
+                          keypadPinReadme
+                        )}
                       </div>
                     </div>
                   </div>
@@ -229,10 +289,24 @@ export function MacOS() {
                 </div>
               </div>
               {/* Readme desktop file */}
-              <div className="absolute top-56 right-10 flex space-y-1 flex-col items-center cursor-not-allowed">
-                <img src="/os/shell.png" className="w-10" />
-                <div className="bg-white bg-opacity-35 px-1 text-sm">
-                  Decrypter.sh
+              <div
+                className={`absolute top-56 right-10 flex space-y-1 flex-col items-center ${
+                  sceneTitle === "DECRYPT"
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed "
+                }`}
+                onClick={() => {
+                  if (sceneTitle === "DECRYPT")
+                    setShowDecryptPopup(!showDecryptPopup);
+                }}
+              >
+                <img src="/os/27.png" className="w-10" />
+                <div
+                  className={`bg-white ${
+                    sceneTitle === "DECRYPT" ? "bg-opacity-90" : "bg-opacity-35"
+                  } px-1 text-sm`}
+                >
+                  Encrypted_Keypad_Stuff.zip
                 </div>
               </div>
               {/* Trash desktop file */}

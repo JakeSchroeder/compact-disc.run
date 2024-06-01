@@ -1,17 +1,17 @@
 import { Canvas } from "@react-three/fiber";
 import { BaseSceneModel } from "./BaseSceneModel";
 import { Physics } from "@react-three/rapier";
-import { allScenesList } from "../lib/sceneUIData";
 import { useSceneStore } from "../stores/SceneStore";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
 import { Lights } from "./Lights";
 import { Artifacts } from "./Artifacts";
 import { EffectComposer } from "@react-three/postprocessing";
-import { Controls } from "./Controls/Controls";
+import { KeyboardControls } from "./Controls/KeyboardControls";
 import { PointerControls } from "./Controls/PointerControls";
 import { HUDController } from "./HUD/HUDController";
 import { CameraController } from "./CameraController";
+import { allScenesList } from "../lib/sceneUIData";
 
 export default function Game() {
   const { currentSceneIndex, setIsHovering } = useSceneStore((state) => state);
@@ -24,10 +24,11 @@ export default function Game() {
 
   return (
     <div id="canvas-container" className="w-full h-full relative">
-      <Controls>
+      <KeyboardControls>
         <HUDController
           hudProps={hudProps}
           currentSceneTitle={currentSceneTitle}
+          isPlayer={isPlayer}
         />
         <Canvas className="w-full h-full relative">
           <EffectComposer autoClear={false}>
@@ -39,7 +40,7 @@ export default function Game() {
                 setIsHovering={setIsHovering}
                 currentSceneIndex={currentSceneIndex}
               />
-              {isPlayer && <Player />}
+              <Player isPlayer={isPlayer} />
               <BaseSceneModel />
             </Physics>
             <PointerControls
@@ -49,7 +50,7 @@ export default function Game() {
             <Lights />
           </EffectComposer>
         </Canvas>
-      </Controls>
+      </KeyboardControls>
     </div>
   );
 }

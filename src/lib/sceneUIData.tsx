@@ -6,6 +6,7 @@ export type TScene = {
   isPointerLocked?: boolean;
   html?: string;
   model?: string;
+  diaryImage?: string;
 };
 
 export const allScenesList: TScene[] = [
@@ -29,8 +30,9 @@ export const allScenesList: TScene[] = [
     cameraProps: {
       type: "DESK",
     },
-    html: "macos",
+    html: "macos_intro",
   },
+
   {
     title: "DIARY",
     hudProps: {
@@ -48,9 +50,11 @@ export const allScenesList: TScene[] = [
   {
     title: "DIARY_INVENTORY",
     hudProps: {
+      image: "/images/diary.jpg",
+      dialogueBtnText: "EXIT Diary",
       type: "InventoryHUD",
       title: "Jake's Diary",
-      year: "Unknown",
+      year: "0000",
       place: "Some bug out shelter",
       description:
         "Gonna be where I keep my secrets kinda like a diary but also not really. Other stuff might be hidden in here too. But I dont want to write that part down... ",
@@ -79,6 +83,7 @@ export const allScenesList: TScene[] = [
   {
     title: "PHOTO_INVENTORY",
     hudProps: {
+      image: "/images/photo.jpg",
       type: "InventoryHUD",
       title: "Family Photo",
       year: "2001",
@@ -109,6 +114,7 @@ export const allScenesList: TScene[] = [
   {
     title: "SLY_COOPER_INVENTORY",
     hudProps: {
+      image: "/images/sly_cooper.jpg",
       type: "InventoryHUD",
       title: "Sly Cooper",
       year: "2002",
@@ -140,6 +146,7 @@ export const allScenesList: TScene[] = [
   {
     title: "SKATEBOARD_INVENTORY",
     hudProps: {
+      image: "/images/skateboard.jpg",
       type: "InventoryHUD",
       title: "Skateboard",
       year: "2004",
@@ -171,6 +178,7 @@ export const allScenesList: TScene[] = [
   {
     title: "MILITARY_INVENTORY",
     hudProps: {
+      image: "/images/military.jpg",
       type: "InventoryHUD",
       title: "Military Equipment",
       year: "2008",
@@ -201,9 +209,10 @@ export const allScenesList: TScene[] = [
   {
     title: "GEE_INVENTORY",
     hudProps: {
+      image: "/images/jiujitsu.jpg",
       type: "InventoryHUD",
       title: "Jiu Jitsu",
-      year: "2012",
+      year: "2009",
       place: "Gracie Academy",
       description: "A photo of my family",
       clue: "Find the martial art of grappling, practiced where strength and technique begin.",
@@ -232,9 +241,10 @@ export const allScenesList: TScene[] = [
   {
     title: "MINECRAFT_INVENTORY",
     hudProps: {
+      image: "/images/trophies.jpg",
       type: "InventoryHUD",
       title: "Minecraft",
-      year: "2011",
+      year: "2010",
       place: "Blocky World",
       description: "A photo of my family",
       clue: "Find the digital realm of blocks and creativity, where endless adventures begin.",
@@ -263,6 +273,7 @@ export const allScenesList: TScene[] = [
   {
     title: "GW2_INVENTORY",
     hudProps: {
+      image: "/images/trophies.jpg",
       type: "InventoryHUD",
       title: "GuildWars2 Trophy",
       year: "2013",
@@ -294,9 +305,10 @@ export const allScenesList: TScene[] = [
   {
     title: "DEVELOPER_INVENTORY",
     hudProps: {
+      image: "/images/trophies.jpg",
       type: "InventoryHUD",
       title: "Code Development Award",
-      year: "2015",
+      year: "2014",
       place: "Silicon Valley",
       description: "A photo of my family",
       clue: "Find the recognition of coding excellence, honoring achievements where innovation begins.",
@@ -325,9 +337,10 @@ export const allScenesList: TScene[] = [
   {
     title: "XFILES_INVENTORY",
     hudProps: {
+      image: "/images/xfiles.jpg",
       type: "InventoryHUD",
       title: "X-Files",
-      year: "1993",
+      year: "2015",
       place: "FBI Headquarters",
       description: "A photo of my family",
       clue: "Find the collection of paranormal cases, uncovering mysteries where the truth begins.",
@@ -355,9 +368,10 @@ export const allScenesList: TScene[] = [
   {
     title: "MUSIC_INVENTORY",
     hudProps: {
+      image: "/images/music.jpg",
       type: "InventoryHUD",
       title: "Music",
-      year: "2001",
+      year: "2016",
       place: "Concert Hall",
       description: "A photo of my family",
       clue: "Find the melodies and harmonies, resonating where emotions and rhythm begin.",
@@ -386,9 +400,10 @@ export const allScenesList: TScene[] = [
   {
     title: "ART_INVENTORY",
     hudProps: {
+      image: "/images/art.jpg",
       type: "InventoryHUD",
       title: "Art",
-      year: "1999",
+      year: "2017",
       place: "Art Gallery",
       description: "A photo of my family",
       clue: "Find the expressions on canvas, depicting beauty and thought where creativity begins.",
@@ -417,9 +432,10 @@ export const allScenesList: TScene[] = [
   {
     title: "COLLEGE_INVENTORY",
     hudProps: {
+      image: "/images/college.jpg",
       type: "InventoryHUD",
       title: "College",
-      year: "2007",
+      year: "2018",
       place: "University Campus",
       description: "A photo of my family",
       clue: "Find the place of higher learning, reflecting the journey where knowledge and paths begin.",
@@ -448,9 +464,10 @@ export const allScenesList: TScene[] = [
   {
     title: "FIRST_PRINCIPLES_INVENTORY",
     hudProps: {
+      image: "/images/first_principles.jpg",
       type: "InventoryHUD",
       title: "Engineering First Principles",
-      year: "2010",
+      year: "2022",
       place: "Engineering Lab",
       description: "A photo of my family",
       clue: "Find the foundation of design and innovation, rooted in basics where understanding begins.",
@@ -468,8 +485,9 @@ export const allScenesList: TScene[] = [
     title: "DECRYPT",
     hudProps: {
       type: "PlayerHUD",
-      dialogueText: "Objective: Decrypt the messages using the PC.",
-      dialogueHoverText: "Press F to interact [DECRYPT]",
+      dialogueText:
+        "Objective: Now that you have collected all the artifacts, decrypt the message from the PC.",
+      dialogueHoverText: "Press F to interact [PC]",
     },
     cameraProps: {
       type: "PLAYER",
@@ -477,6 +495,7 @@ export const allScenesList: TScene[] = [
     isPlayer: true,
     model: "pc",
   },
+
   {
     title: "DECRYPTSCREEN",
     hudProps: {
@@ -488,8 +507,9 @@ export const allScenesList: TScene[] = [
       type: "DESK",
     },
     model: "pc",
-    html: "macos",
+    html: "macos_decrypt",
   },
+
   {
     title: "KEYPAD",
     hudProps: {

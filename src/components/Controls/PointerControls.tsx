@@ -17,7 +17,6 @@ export function PointerControls({
       if (!isPlayer) {
         pointerControlsRef.current.unlock();
       }
-      //   pointerControlsRef.current.lock();
     }
   }, [pointerLockSelector]);
   return (

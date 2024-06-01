@@ -13,7 +13,7 @@ export function InventoryHUD({
     <div>
       <DialogueBtn
         pointerLockSelector={pointerLockSelector}
-        text={hudProps.dialogueBtnText}
+        text={"EXIT [DIARY]"}
       />
       <DialogueText text={"Read the Diary and the next clue."} />
       <Inventory hudProps={hudProps} />

@@ -15,12 +15,13 @@ const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
 
-export function Player() {
+export function Player({ isPlayer }: { isPlayer?: boolean }) {
   const ref = useRef<RapierRigidBody>(null);
   const rapier = useRapier();
   const { camera } = useThree();
   const [_, getKeyboard] = useKeyboardControls();
   useFrame(() => {
+    if (!isPlayer) return;
     const { forward, backward, left, right, jump } = getKeyboard();
     // Not working yet
 

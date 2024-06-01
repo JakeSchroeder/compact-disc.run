@@ -11,6 +11,7 @@ import { ScreenSaver } from "./ScreenSaver";
 export function Artifacts({
   currentSceneTitle,
   setIsHovering,
+  currentSceneIndex,
 }: {
   currentSceneTitle: string;
   currentSceneIndex: number;
@@ -31,7 +32,8 @@ export function Artifacts({
 
   const htmlComponents = {
     screensaver: <ScreenSaver />,
-    macos: <MacOS />,
+    macos_intro: <MacOS sceneTitle="INTRO" />,
+    macos_decrypt: <MacOS sceneTitle="DECRYPT" />,
   };
 
   const nodeListRef = useRef<any[]>([]);
@@ -68,22 +70,28 @@ export function Artifacts({
         <Fragment key={index}>
           {node.html && currentSceneTitle === node.sceneTitle && node.html}
           {node.geometry && (
-            <mesh
-              ref={node.ref}
-              //@ts-ignore
-              geometry={node.geometry}
-              material={materials.environment}
-              onPointerOver={() => {
-                if (currentSceneTitle === node.sceneTitle && !node.html) {
-                  setCurrentHoveredArtifact(node.ref);
-                  setIsHovering(true);
-                }
-              }}
-              onPointerLeave={() => {
-                setCurrentHoveredArtifact(undefined);
-                setIsHovering(false);
-              }}
-            />
+            <>
+              {node.modelName === "diary" && currentSceneIndex > 2 ? ( //Hide the diary after the first 3 scenes
+                <></>
+              ) : (
+                <mesh
+                  ref={node.ref}
+                  //@ts-ignore
+                  geometry={node.geometry}
+                  material={materials.environment}
+                  onPointerOver={() => {
+                    if (currentSceneTitle === node.sceneTitle && !node.html) {
+                      setCurrentHoveredArtifact(node.ref);
+                      setIsHovering(true);
+                    }
+                  }}
+                  onPointerLeave={() => {
+                    setCurrentHoveredArtifact(undefined);
+                    setIsHovering(false);
+                  }}
+                />
+              )}
+            </>
           )}
         </Fragment>
       ))}

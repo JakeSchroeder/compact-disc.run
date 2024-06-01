@@ -1,8 +1,17 @@
 export function Inventory({ hudProps }: { hudProps: any }) {
   const { title, year, place, description, clue, nextClue } = hudProps;
+
   return (
     <>
-      <div className="text-white grid grid-cols-2 absolute p-12 gap-16 z-10 left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[732px] bg-black bg-opacity-90">
+      <div
+        style={{
+          backgroundImage: `url(/images/diary-bg.png)`,
+          backgroundSize: "100%",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        className="text-black font-bold grid grid-cols-2 absolute p-32 gap-16 z-10 left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[850px] "
+      >
         <div className="flex flex-col justify-between">
           <div className="flex flex-col items-start space-y-3">
             <h1 className="text-base">TITLE: {title}</h1>
@@ -13,15 +22,22 @@ export function Inventory({ hudProps }: { hudProps: any }) {
           </div>
           <h2 className="">NEXT CLUE: {nextClue}</h2>
         </div>
-        <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[1px] bg-white bg-opacity-10"></div>
-        <div className="flex flex-col justify-between">
-          {/* <div className="flex flex-col items-start space-y-3">
-            <h1 className="">TITLE: Unknown</h1>
-            <h2 className="">YEAR: Unknown</h2>
-            <h2 className="">PLACE: Unknown</h2>
-            <p className="">DESCRIPTION: Unknown</p>
+
+        <div className="relative w-full h-full">
+          <img
+            className="absolute -top-28 right-32 z-20"
+            src="/images/paperclip.png"
+            alt="paper clip"
+          />
+          <div className="absolute -top-11 right-0 left-[68px]">
+            <img
+              width={324}
+              height={324}
+              src={hudProps.image}
+              alt={hudProps.title}
+              className="rotate-[13.5deg]"
+            />
           </div>
-          <h2>NEXT CLUE: Unknown</h2> */}
         </div>
       </div>
     </>

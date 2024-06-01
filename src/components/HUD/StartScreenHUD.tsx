@@ -11,48 +11,51 @@ export function StartScreenHUD({
       id={pointerLockSelector}
       className="absolute inset-0 w-full h-full z-50"
     >
-      <div className="w-[420px] overflow-hidden text-white bg-black bg-opacity-70 absolute left-8 top-8 bottom-8 z-10">
+      <div className="w-[420px] flex flex-col overflow-hidden text-white bg-black bg-opacity-70 absolute left-8 top-8 bottom-8 z-10">
         <div className="p-8 bg-black">
           <img src={logo} alt="logo" className="w-full h-40" />
         </div>
-        <div className="p-8 space-y-8 overflow-y-auto h-full">
-          <div className="space-y-2">
-            <h2 className="text-xl">Read me</h2>
-            <p className="text-white text-opacity-70">
-              It is my pleasure to inform you of your successful user candidacy.
-              You have been selected to be the{" "}
-              <span className="text-base text-white">[83th]</span> player of my
-              game.
-            </p>
-          </div>
-          <div className="h-px bg-white bg-opacity-30 w-full"></div>
-          <div className="space-y-2">
-            <h2 className="text-xl">Player Requirements</h2>
-            <ul className="text-white text-opacity-70">
-              <li>- Toaster / Any PC or Laptop</li>
-              <li>- 10 minutes to spare</li>
-              <li>- Open mind</li>
-              <li>- Share on Twitter plz 0_o</li>
-            </ul>
-          </div>
-          <div className="h-px bg-white bg-opacity-30 w-full"></div>
-          <div className="space-y-2">
-            <h2 className="text-xl">
-              Changelog [
-              <a
-                className="underline text-base"
-                href="/changelog.txt"
-                target="_blank"
-              >
-                Read all
-              </a>
-              ]
-            </h2>
-            <ul className="text-white text-opacity-70">
-              <li>- 06-01-24 Launched!</li>
-              <li>- Before that... dev.</li>
-              <li>- Before that... birth.</li>
-            </ul>
+        <div className="overflow-y-scroll scrollbar scrollbar-thumb-black scrollbar-track-[#ffffff10] h-full">
+          {/* // TODO: need to figure out overscroll issue */}
+          <div className="p-8 space-y-8">
+            <div className="space-y-2">
+              <h2 className="text-xl">Read me</h2>
+              <p className="text-white text-opacity-70">
+                It is my pleasure to inform you of your successful user
+                candidacy. You have been selected to be the{" "}
+                <span className="text-base text-white">[83th]</span> player of
+                my game.
+              </p>
+            </div>
+            <div className="h-px bg-white bg-opacity-30 w-full"></div>
+            <div className="space-y-2">
+              <h2 className="text-xl">Player Requirements</h2>
+              <ul className="text-white text-opacity-70">
+                <li>- Toaster / Any PC or Laptop</li>
+                <li>- 10 minutes to spare</li>
+                <li>- Open mind</li>
+                <li>- Share on Twitter plz 0_o</li>
+              </ul>
+            </div>
+            <div className="h-px bg-white bg-opacity-30 w-full"></div>
+            <div className="space-y-2">
+              <h2 className="text-xl">
+                Changelog [
+                <a
+                  className="underline text-base"
+                  href="/changelog.txt"
+                  target="_blank"
+                >
+                  Read all
+                </a>
+                ]
+              </h2>
+              <ul className="text-white text-opacity-70">
+                <li>- 06-01-24 Launched!</li>
+                <li>- Before that... dev.</li>
+                <li>- Before that... birth.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +64,6 @@ export function StartScreenHUD({
       >
         {`The mind restlessly awaits. \n Sooth thyself and cherish the day.`}
       </div>
-
       <PlayMenu />
       <p className="text-center absolute bottom-8 left-1/2 -translate-x-1/2 text-xs text-white text-opacity-30">
         Version 1.111111111111111 (random-hash-thing-token-build-id)
@@ -117,7 +119,7 @@ function PlayMenu() {
         </div>
       </div>
       <button
-        className="border-2 border-white h-24 text-4xl text-white bg-black"
+        className="border-2 border-white border-opacity-30 h-24 text-4xl text-white bg-black hover:border-opacity-100"
         onClick={() => {
           document.body.requestFullscreen();
           setCurrentSceneIndex(1);
