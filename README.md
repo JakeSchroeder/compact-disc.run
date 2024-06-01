@@ -1,4 +1,4 @@
-# Compact Disc
+# Compact Disc (v1.1)
 
 Compact disc is a project I started in efforts to make the web weird again.
 
