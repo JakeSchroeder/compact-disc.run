@@ -6,7 +6,7 @@ const Game = lazy(() => import("./components/Game"));
 function App() {
   return (
     <>
-      <div className="lg:hidden text-white flex items-center justify-center w-full h-full">
+      <div className="lg:hidden text-center text-white flex items-center justify-center w-full h-full">
         Get on a laptop or desktop and try again.
       </div>
       <div className="hidden lg:block w-full h-full">
