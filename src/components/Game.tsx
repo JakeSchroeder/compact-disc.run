@@ -15,24 +15,13 @@ import { allScenesList } from "../lib/sceneUIData";
 import { SoundController } from "./SoundController";
 
 export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore(
-    (state) => state
-  );
-  const {
-    hudProps,
-    cameraProps,
-    isPlayer,
-    title: currentSceneTitle,
-  } = allScenesList[currentSceneIndex];
+  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
+  const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
 
   return (
-    <div id="canvas-container" className="w-full h-full relative">
+    <div id="canvas-container" className="w-full h-full relative hidden lg:block">
       <KeyboardControls>
-        <HUDController
-          hudProps={hudProps}
-          currentSceneTitle={currentSceneTitle}
-          isPlayer={isPlayer}
-        />
+        <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
         {shouldPlaySound && <SoundController />}
         <Canvas className="w-full h-full relative">
           <EffectComposer autoClear={false}>
@@ -47,10 +36,7 @@ export default function Game() {
               <Player isPlayer={isPlayer} />
               <BaseSceneModel />
             </Physics>
-            <PointerControls
-              isPlayer={isPlayer}
-              pointerLockSelector={currentSceneTitle}
-            />
+            <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
             <Lights />
           </EffectComposer>
         </Canvas>
