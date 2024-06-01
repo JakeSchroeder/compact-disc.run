@@ -12,9 +12,12 @@ import { PointerControls } from "./Controls/PointerControls";
 import { HUDController } from "./HUD/HUDController";
 import { CameraController } from "./CameraController";
 import { allScenesList } from "../lib/sceneUIData";
+import { SoundController } from "./SoundController";
 
 export default function Game() {
-  const { currentSceneIndex, setIsHovering } = useSceneStore((state) => state);
+  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore(
+    (state) => state
+  );
   const {
     hudProps,
     cameraProps,
@@ -30,6 +33,7 @@ export default function Game() {
           currentSceneTitle={currentSceneTitle}
           isPlayer={isPlayer}
         />
+        {shouldPlaySound && <SoundController />}
         <Canvas className="w-full h-full relative">
           <EffectComposer autoClear={false}>
             <PostProcessing />

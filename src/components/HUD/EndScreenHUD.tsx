@@ -20,15 +20,11 @@ export function EndScreenHUD({
         </p>
         <ul>
           <li>Created by Jake Schroeder</li>
-          <li>Music by Jake Schroeder</li>
-          <li>Sound Design by Jake Schroeder</li>
-          <li>Art by Jake Schroeder</li>
-          <li>Code by Jake Schroeder</li>
+          <li>Models by Jake Schroeder</li>
+          <li>Textures by Jake Schroeder</li>
+          <li>Programming by Jake Schroeder</li>
           <li>Writing by Jake Schroeder</li>
-          <li>Marketing by Jake Schroeder</li>
-          <li>Support by Jake Schroeder</li>
-          <li>Special Thanks to Jake Schroeder</li>
-          <li>Jesus christ Jake Schroeder is full of himself.</li>
+          <li>Music by Higher Intelligence Agency (HIA)</li>
         </ul>
         <div className="flex space-x-8 items-center">
           <a href="https://google.com" className="underline">

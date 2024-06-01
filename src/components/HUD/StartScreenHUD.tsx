@@ -75,8 +75,8 @@ export function StartScreenHUD({
 }
 
 function PlayMenu() {
-  const setCurrentSceneIndex = useSceneStore(
-    (state) => state.setCurrentSceneIndex
+  const { setCurrentSceneIndex, setShouldPlaySound } = useSceneStore(
+    (state) => state
   );
   return (
     <div className="flex flex-col w-[380px] absolute right-8 bottom-8  bg-black bg-opacity-70 z-10">
@@ -123,6 +123,7 @@ function PlayMenu() {
         onClick={() => {
           document.body.requestFullscreen();
           setCurrentSceneIndex(1);
+          setShouldPlaySound(true);
         }}
       >
         PLAY
