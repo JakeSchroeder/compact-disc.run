@@ -1,3 +1,4 @@
+https://upload.wikimedia.org/wikipedia/commons/e/e8/CD_autolev_crop_new.jpg
 # Compact Disc (v1.1)
 
 Compact disc is a project I started in efforts to make the web weird again.
