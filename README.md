@@ -1,4 +1,5 @@
-https://upload.wikimedia.org/wikipedia/commons/e/e8/CD_autolev_crop_new.jpg
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/CD_autolev_crop_new.jpg" style="width:64px; height:64px" alt="compact disc"/>
+
 # Compact Disc (v1.1)
 
 Compact disc is a project I started in efforts to make the web weird again.
