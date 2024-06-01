@@ -16,6 +16,12 @@ Points of interest:
 - Realtime physics never been so simple. Rapier-js integrated with r3f is truly remarkable. Web Assembly makes quick work of them rigid body calcs.
 - Screen space shaders highlight effects are dead simple with r3f post processing... it really is like cheating.
 
+Roadmap:
+
+[] Start screen camera transition
+[] FPS desk controls with focus pull
+[] Playable turn table with song list
+[] Original sound track
 
 Aside:
 
