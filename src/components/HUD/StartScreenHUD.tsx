@@ -32,9 +32,9 @@ export function StartScreenHUD({
               <h2 className="text-xl">Player Requirements</h2>
               <ul className="text-white text-opacity-70">
                 <li>- Toaster / Any PC or Laptop</li>
-                <li>- 10 minutes to spare</li>
-                <li>- Open mind</li>
-                <li>- Share on Twitter plz 0_o</li>
+                <li>- At least 1920 x 1080</li>
+                <li>- Some outside the box thinking</li>
+                <li>- Share on Twitter</li>
               </ul>
             </div>
             <div className="h-px bg-white bg-opacity-30 w-full"></div>

@@ -1,5 +1,4 @@
-import { CameraControls, PerspectiveCamera } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
 
 export function CameraController({ cameraProps }: { cameraProps: any }) {
   return (
