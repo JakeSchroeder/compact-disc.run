@@ -18,6 +18,7 @@ Points of interest:
 
 Roadmap:
 
+- [ ] Camera bounds
 - [ ] Start screen camera transition
 - [ ] FPS desk controls with focus pull
 - [ ] Playable turn table with song list
