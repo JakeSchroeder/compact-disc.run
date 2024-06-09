@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 import { useEffect, useRef } from "react";
 
-export function SoundController({}: {}) {
+export function SoundController() {
   const howler = useRef<Howl | null>(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function SoundController({}: {}) {
       });
     }
 
-    howler.current.play();
+    // howler.current.play();
 
     return () => {
       if (howler.current) {
@@ -22,7 +22,7 @@ export function SoundController({}: {}) {
         howler.current = null;
       }
     };
-  }, []); // React only to changes in currentSceneTitle
+  }, []);
 
-  return null; // This component does not render anything
+  return null;
 }

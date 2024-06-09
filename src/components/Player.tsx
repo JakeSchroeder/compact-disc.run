@@ -3,12 +3,7 @@ import * as RAPIER from "@dimforge/rapier3d-compat";
 import { useRef } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
-import {
-  CapsuleCollider,
-  RapierRigidBody,
-  RigidBody,
-  useRapier,
-} from "@react-three/rapier";
+import { CapsuleCollider, RapierRigidBody, RigidBody, useRapier } from "@react-three/rapier";
 
 const SPEED = 4;
 const direction = new THREE.Vector3();
@@ -23,35 +18,22 @@ export function Player({ isPlayer }: { isPlayer?: boolean }) {
   useFrame(() => {
     if (!isPlayer) return;
     const { forward, backward, left, right, jump } = getKeyboard();
-    // Not working yet
 
     if (ref.current) {
       const velocity = ref.current.linvel();
+
       // update camera
-      camera.position.set(
-        ref.current.translation().x,
-        ref.current.translation().y + 0.5,
-        ref.current.translation().z
-      );
+      camera.position.set(ref.current.translation().x, ref.current.translation().y + 0.5, ref.current.translation().z);
 
       // movement
       frontVector.set(0, 0, (backward ? 1 : 0) - (forward ? 1 : 0));
       sideVector.set((left ? 1 : 0) - (right ? 1 : 0), 0, 0);
-      direction
-        .subVectors(frontVector, sideVector)
-        .normalize()
-        .multiplyScalar(SPEED)
-        .applyEuler(camera.rotation);
-      ref.current.setLinvel(
-        { x: direction.x, y: velocity.y, z: direction.z },
-        true
-      );
-      // jumping
+      direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(camera.rotation);
+      ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z }, true);
+
       const world = rapier.world;
-      //@ts-ignore hehe
-      const ray = world.castRay(
-        new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 })
-      );
+      //@ts-expect-error hehe
+      const ray = world.castRay(new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 }));
       const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75;
       if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 }, true);
     }

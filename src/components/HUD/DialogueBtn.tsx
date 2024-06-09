@@ -8,14 +8,9 @@ export function DialogueBtn({
   pointerLockSelector?: string | undefined;
   text: string | undefined;
 }) {
-  const { currentSceneIndex, setCurrentSceneIndex } = useSceneStore(
-    (state) => state
-  );
+  const { currentSceneIndex, setCurrentSceneIndex } = useSceneStore((state) => state);
   return (
-    <div
-      id={pointerLockSelector}
-      className="absolute top-8 left-8 z-10 text-white"
-    >
+    <div id={pointerLockSelector} className="absolute top-8 left-8 z-10 text-white z-50">
       <button
         className="text-sm py-4 px-8 bg-black bg-opacity-70 flex items-center space-x-4"
         onClick={() => {

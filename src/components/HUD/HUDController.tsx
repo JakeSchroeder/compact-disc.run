@@ -17,9 +17,7 @@ export function HUDController({
 }) {
   return (
     <>
-      {hudProps.type === "StartScreenHUD" && (
-        <StartScreenHUD {...hudProps} pointerLockSelector={currentSceneTitle} />
-      )}
+      {hudProps.type === "StartScreenHUD" && <StartScreenHUD {...hudProps} pointerLockSelector={currentSceneTitle} />}
       {hudProps.type === "PlayerHUD" && (
         <>
           <PlayerHUD {...hudProps} pointerLockSelector={currentSceneTitle} />
@@ -27,18 +25,9 @@ export function HUDController({
           {isPlayer && <WASDInstructions />}
         </>
       )}
-      {hudProps.type === "InventoryHUD" && (
-        <InventoryHUD
-          hudProps={hudProps}
-          pointerLockSelector={currentSceneTitle}
-        />
-      )}
-      {hudProps.type === "KeypadHUD" && (
-        <KeypadHUD pointerLockSelector={currentSceneTitle} />
-      )}
-      {hudProps.type === "EndScreenHUD" && (
-        <EndScreenHUD pointerLockSelector={currentSceneTitle} />
-      )}
+      {hudProps.type === "InventoryHUD" && <InventoryHUD hudProps={hudProps} pointerLockSelector={currentSceneTitle} />}
+      {hudProps.type === "KeypadHUD" && <KeypadHUD pointerLockSelector={currentSceneTitle} />}
+      {hudProps.type === "EndScreenHUD" && <EndScreenHUD pointerLockSelector={currentSceneTitle} />}
     </>
   );
 }

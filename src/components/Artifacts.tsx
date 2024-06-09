@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { KTX2Loader } from "three/examples/jsm/Addons.js";
-import { Fragment, useRef, useState } from "react";
+import { Fragment, createRef, useRef, useState } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
@@ -19,16 +19,11 @@ export function Artifacts({
 }) {
   const { gl } = useThree();
 
-  const { nodes, materials } = useGLTF(
-    "/models/scene-draco-ktx.glb",
-    true,
-    false,
-    (loader) => {
-      const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
-      //@ts-ignore
-      loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
-    }
-  );
+  const { nodes, materials } = useGLTF("/models/scene-draco-ktx.glb", true, false, (loader) => {
+    const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
+    //@ts-ignore
+    loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
+  });
 
   const htmlComponents = {
     screensaver: <ScreenSaver />,
@@ -44,7 +39,7 @@ export function Artifacts({
     nodeListRef.current.push({
       sceneTitle: scene.title,
       modelName: scene.model,
-      ref: useRef<any>(),
+      ref: useRef<any>(null), //TODO: fix this lol...
       //@ts-ignore
       geometry: scene.model && nodes[scene.model].geometry,
       //@ts-ignore
@@ -70,28 +65,23 @@ export function Artifacts({
         <Fragment key={index}>
           {node.html && currentSceneTitle === node.sceneTitle && node.html}
           {node.geometry && (
-            <>
-              {node.modelName === "diary" && currentSceneIndex > 2 ? ( //Hide the diary after the first 3 scenes
-                <></>
-              ) : (
-                <mesh
-                  ref={node.ref}
-                  //@ts-ignore
-                  geometry={node.geometry}
-                  material={materials.environment}
-                  onPointerOver={() => {
-                    if (currentSceneTitle === node.sceneTitle && !node.html) {
-                      setCurrentHoveredArtifact(node.ref);
-                      setIsHovering(true);
-                    }
-                  }}
-                  onPointerLeave={() => {
-                    setCurrentHoveredArtifact(undefined);
-                    setIsHovering(false);
-                  }}
-                />
-              )}
-            </>
+            <mesh
+              visible={node.modelName === "diary" && currentSceneIndex > 2 ? false : true}
+              ref={node.ref}
+              //@ts-ignore
+              geometry={node.geometry}
+              material={materials.environment}
+              onPointerOver={() => {
+                if (currentSceneTitle === node.sceneTitle && !node.html) {
+                  setCurrentHoveredArtifact(node.ref);
+                  setIsHovering(true);
+                }
+              }}
+              onPointerLeave={() => {
+                setCurrentHoveredArtifact(undefined);
+                setIsHovering(false);
+              }}
+            />
           )}
         </Fragment>
       ))}

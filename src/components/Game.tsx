@@ -13,32 +13,37 @@ import { HUDController } from "./HUD/HUDController";
 import { CameraController } from "./CameraController";
 import { allScenesList } from "../lib/sceneUIData";
 import { SoundController } from "./SoundController";
+import { PerformanceMonitor } from "@react-three/drei";
+import { useState } from "react";
+import round from "lodash/round";
 
 export default function Game() {
   const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
-
+  const [dpr, setDpr] = useState(1);
   return (
     <div id="canvas-container" className="w-full h-full relative hidden lg:block">
       <KeyboardControls>
         <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
         {shouldPlaySound && <SoundController />}
-        <Canvas className="w-full h-full relative">
-          <EffectComposer autoClear={false}>
-            <PostProcessing />
-            <Physics gravity={[0, -30, 0]}>
-              <CameraController cameraProps={cameraProps} />
-              <Artifacts
-                currentSceneTitle={currentSceneTitle}
-                setIsHovering={setIsHovering}
-                currentSceneIndex={currentSceneIndex}
-              />
-              <Player isPlayer={isPlayer} />
-              <BaseSceneModel />
-            </Physics>
-            <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
-            <Lights />
-          </EffectComposer>
+        <Canvas dpr={dpr} frameloop="demand" className="w-full h-full relative">
+          <PerformanceMonitor onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}>
+            <EffectComposer autoClear={false}>
+              <PostProcessing />
+              <Physics gravity={[0, -30, 0]}>
+                <CameraController cameraProps={cameraProps} />
+                <Artifacts
+                  currentSceneTitle={currentSceneTitle}
+                  setIsHovering={setIsHovering}
+                  currentSceneIndex={currentSceneIndex}
+                />
+                <Player isPlayer={isPlayer} />
+                <BaseSceneModel />
+              </Physics>
+              <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
+              <Lights />
+            </EffectComposer>
+          </PerformanceMonitor>
         </Canvas>
       </KeyboardControls>
     </div>

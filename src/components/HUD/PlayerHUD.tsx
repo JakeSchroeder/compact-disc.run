@@ -15,14 +15,10 @@ export function PlayerHUD({
 }) {
   return (
     <div>
+      {/* <div className="absoulte inset-0 w-full h-full z-[999]" id="player-overlay" /> */}
       <DialogueHoverText text={dialogueHoverText} />
       <DialogueText text={dialogueText} />
-      {dialogueBtnText && (
-        <DialogueBtn
-          text={dialogueBtnText}
-          pointerLockSelector={pointerLockSelector}
-        />
-      )}
+      {dialogueBtnText && <DialogueBtn text={dialogueBtnText} pointerLockSelector={pointerLockSelector} />}
     </div>
   );
 }

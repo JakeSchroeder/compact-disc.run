@@ -10,7 +10,7 @@ export function PointerControls({
 }) {
   const pointerControlsRef = useRef<any>(null);
   useEffect(() => {
-    if (pointerControlsRef.current && pointerLockSelector) {
+    if (pointerControlsRef.current) {
       if (isPlayer) {
         pointerControlsRef.current.lock();
       }
@@ -18,11 +18,14 @@ export function PointerControls({
         pointerControlsRef.current.unlock();
       }
     }
-  }, [pointerLockSelector]);
+  }, [isPlayer]);
+
   return (
-    <PointerLockControls
-      ref={pointerControlsRef}
-      selector={pointerLockSelector}
-    />
+    <>
+      <PointerLockControls
+        ref={pointerControlsRef}
+        selector={!isPlayer && pointerLockSelector ? pointerLockSelector : undefined}
+      />
+    </>
   );
 }
