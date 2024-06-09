@@ -20,14 +20,15 @@ import round from "lodash/round";
 export default function Game() {
   const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
-  const [dpr, setDpr] = useState(1);
+
+  const [viewDPR, setViewDPR] = useState(1);
   return (
     <div id="canvas-container" className="w-full h-full relative hidden lg:block">
       <KeyboardControls>
         <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
         {shouldPlaySound && <SoundController />}
-        <Canvas dpr={dpr} frameloop="demand" className="w-full h-full relative">
-          <PerformanceMonitor onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}>
+        <Canvas dpr={viewDPR} frameloop="demand" className="w-full h-full relative">
+          <PerformanceMonitor onChange={({ factor }) => setViewDPR(round(0.5 + 1.5 * factor, 1))}>
             <EffectComposer autoClear={false}>
               <PostProcessing />
               <Physics gravity={[0, -30, 0]}>
