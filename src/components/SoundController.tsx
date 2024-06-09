@@ -13,7 +13,7 @@ export function SoundController() {
       });
     }
 
-    // howler.current.play();
+    howler.current.play();
 
     return () => {
       if (howler.current) {
