@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { KTX2Loader } from "three/examples/jsm/Addons.js";
-import { Fragment, createRef, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
