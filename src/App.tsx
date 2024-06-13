@@ -1,5 +1,6 @@
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Suspense, lazy } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 const Game = lazy(() => import("./components/Game"));
 
@@ -14,6 +15,7 @@ function App() {
           <Game />
         </Suspense>
       </div>
+      <Analytics />
     </>
   );
 }
