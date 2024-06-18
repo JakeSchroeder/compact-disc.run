@@ -14,11 +14,11 @@ import { CameraController } from "./CameraController";
 import { allScenesList } from "../lib/sceneUIData";
 import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import round from "lodash/round";
 
 export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
+  const { currentSceneIndex, setIsHovering, shouldPlaySound, setIsSceneLoading } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
 
   const [viewDPR, setViewDPR] = useState(1);
@@ -28,25 +28,36 @@ export default function Game() {
         <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
         {shouldPlaySound && <SoundController />}
         <Canvas dpr={viewDPR} frameloop="demand" className="w-full h-full relative">
-          <PerformanceMonitor onChange={({ factor }) => setViewDPR(round(0.5 + 1.5 * factor, 1))}>
-            <EffectComposer autoClear={false}>
-              <PostProcessing />
-              <Physics gravity={[0, -30, 0]}>
-                <CameraController cameraProps={cameraProps} />
-                <Artifacts
-                  currentSceneTitle={currentSceneTitle}
-                  setIsHovering={setIsHovering}
-                  currentSceneIndex={currentSceneIndex}
-                />
-                <Player isPlayer={isPlayer} />
-                <BaseSceneModel />
-              </Physics>
-              <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
-              <Lights />
-            </EffectComposer>
-          </PerformanceMonitor>
+          <Suspense fallback={null}>
+            <PerformanceMonitor onChange={({ factor }) => setViewDPR(round(0.5 + 1.5 * factor, 1))}>
+              <EffectComposer autoClear={false}>
+                <PostProcessing />
+                <Physics gravity={[0, -30, 0]}>
+                  <CameraController cameraProps={cameraProps} />
+                  <Artifacts
+                    currentSceneTitle={currentSceneTitle}
+                    setIsHovering={setIsHovering}
+                    currentSceneIndex={currentSceneIndex}
+                  />
+                  <Player isPlayer={isPlayer} />
+                  <BaseSceneModel />
+                </Physics>
+                <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
+                <Lights />
+              </EffectComposer>
+            </PerformanceMonitor>
+            <DoneLoading setIsSceneLoading={setIsSceneLoading} />
+          </Suspense>
         </Canvas>
       </KeyboardControls>
     </div>
   );
+}
+
+function DoneLoading({ setIsSceneLoading }: { setIsSceneLoading: any }) {
+  useEffect(() => {
+    setIsSceneLoading(false);
+  }, []);
+
+  return <></>;
 }
