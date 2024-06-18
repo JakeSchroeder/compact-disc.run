@@ -18,7 +18,7 @@ import { Suspense, useEffect, useState } from "react";
 import round from "lodash/round";
 
 export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound, setIsSceneLoading } = useSceneStore((state) => state);
+  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
 
   const [viewDPR, setViewDPR] = useState(1);
@@ -46,7 +46,7 @@ export default function Game() {
                 <Lights />
               </EffectComposer>
             </PerformanceMonitor>
-            <DoneLoading setIsSceneLoading={setIsSceneLoading} />
+            <DoneLoading />
           </Suspense>
         </Canvas>
       </KeyboardControls>
@@ -54,7 +54,7 @@ export default function Game() {
   );
 }
 
-function DoneLoading({ setIsSceneLoading }: { setIsSceneLoading: any }) {
+function DoneLoading() {
   useEffect(() => {
     document.getElementById("loading-screen")?.remove();
   }, []);
