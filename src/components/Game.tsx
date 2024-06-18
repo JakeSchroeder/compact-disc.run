@@ -56,7 +56,7 @@ export default function Game() {
 
 function DoneLoading({ setIsSceneLoading }: { setIsSceneLoading: any }) {
   useEffect(() => {
-    setIsSceneLoading(false);
+    document.getElementById("loading-screen")?.remove();
   }, []);
 
   return <></>;

@@ -19,9 +19,49 @@
     <meta name="twitter:description" content="A 3D Alternate Reality RPG Portfolio Escape Room">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image:src" content="https://compact-disc.run/og-image.png">
+    <style>
+     body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+
+    </style>
   </head>
-  <body class="bg-black">
-   
+  <body>
+    <div id="loading-screen" style="font-display: swap; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background: black; z-index: 999; position: absolute; inset: 0; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; gap: 40px;">
+      <div style="display: flex; flex-direction: column; align-items: center; font-size: 28px;">
+        <blockquote style="text-align: center; line-height: 44px; max-width: 52ch; margin: 28px 40px;">
+          “Humans on planet earth used to enjoy walking up to their desks.
+          Sitting down for prolonged periods of time. Surfing the so-called
+          inter-webs. However, around the mid 2000s the enjoyment turned to
+          stress and fatigue. Historians chalk it up to many tangentially
+          related things.”
+        </blockquote>
+        
+        <div style="font-size: 20px; color: rgba(255, 255, 255, 0.7);">
+          - Tired Magazine (2024)
+        </div>
+      </div>
+      <div style="width: 100%; font-size: 12px; max-width: 512px; gap: 12px; padding-top: 64px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px;">
+          <div style="color: rgba(255, 255, 255, 0.7);">Loading...</div>
+          <div style="color: rgba(255, 255, 255, 0.35);">
+            /path/to/path/to/that-one-really-cool-asset.zip
+          </div>
+        </div>
+        <div style="position: relative; height: 32px; width: 100%; padding: 4px; border: 2px solid rgba(255, 255, 255, 0.55); border-radius: 2px; display: flex; align-items: center; gap: 8px;">
+          <div style="width: 10%; height: 100%; background-color: white; display: flex; align-items: center; justify-content: end;"></div>
+          <div style="font-size: 14px; font-weight: bold;">10%</div>
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
