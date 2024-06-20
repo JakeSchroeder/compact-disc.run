@@ -3,8 +3,8 @@ import { useSceneStore } from "../stores/SceneStore";
 
 export function LoadingScreen() {
   const sceneLoading = useSceneStore((state) => state.sceneLoading);
-
-  //When the JS is parsed and exec'd this will mount so we need to remove the index.html SSR'd loading screen
+  //When the JS is parsed and exec'd this will
+  //mount so we need to remove the index.html SSR'd loading screen
   useEffect(() => {
     const loadingScreenEl = document.getElementById("loading-screen");
     if (loadingScreenEl) {

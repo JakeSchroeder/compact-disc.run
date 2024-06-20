@@ -1,4 +1,4 @@
-import { useGLTF, useProgress } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { KTX2Loader } from "three/examples/jsm/Addons.js";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";

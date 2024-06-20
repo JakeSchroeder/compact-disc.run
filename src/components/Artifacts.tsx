@@ -53,7 +53,7 @@ export function Artifacts({
     <>
       <Outline
         selection={currentHoveredArtifact}
-        blendFunction={BlendFunction.SCREEN} // set this to BlendFunction.ALPHA for dark outlines
+        blendFunction={BlendFunction.SCREEN}
         edgeStrength={20} // the edge strength
         pulseSpeed={0.0} // a pulse speed. A value of zero disables the pulse effect
         visibleEdgeColor={0xff2400} // the color of visible edges

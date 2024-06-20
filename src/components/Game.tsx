@@ -15,13 +15,12 @@ import { allScenesList } from "../lib/sceneUIData";
 import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
-import round from "lodash/round";
 import { LoadingManager } from "./LoadingManager";
+import round from "lodash/round";
 
 export default function Game() {
   const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
-
   const [viewDPR, setViewDPR] = useState(1);
   return (
     <div id="canvas-container" className="w-full h-full relative hidden lg:block">
