@@ -7,6 +7,8 @@ export interface ISceneStore {
   setIsHovering: (setIsHovering: boolean) => void;
   shouldPlaySound: boolean;
   setShouldPlaySound: (setShouldPlaySound: boolean) => void;
+  sceneLoading: any;
+  setSceneLoading: (setSceneLoading: any) => void;
 }
 
 export const useSceneStore = create<ISceneStore>((set) => ({
@@ -16,4 +18,8 @@ export const useSceneStore = create<ISceneStore>((set) => ({
   shouldPlaySound: false,
   setIsHovering: (setIsHovering: boolean) => set(() => ({ isHovering: setIsHovering })),
   setShouldPlaySound: (setShouldPlaySound: boolean) => set(() => ({ shouldPlaySound: setShouldPlaySound })),
+  sceneLoading: {
+    isLoading: true,
+  },
+  setSceneLoading: (setSceneLoading: any) => set(() => ({ sceneLoading: setSceneLoading })),
 }));

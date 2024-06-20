@@ -1,72 +1,34 @@
-// @ts-nocheck
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useProgress } from "@react-three/drei";
+import { ReactNode, Suspense, useEffect } from "react";
+import { useSceneStore } from "../stores/SceneStore";
 
-const PromiseThrower = () => {
-  throw new Promise(() => {});
-};
+export function SmartSuspense({ children, onLoaded }: { children: ReactNode; onLoaded: () => void }) {
+  // const { sceneLoading, setSceneLoading } = useSceneStore((state) => state);
 
-const FallbackDelayer = ({
-  fallback,
-  fallbackDelayMs = void 0,
-  onShowFallback,
-}) => {
-  const [showFallback, setShowFallback] = useState(false);
+  const { progress, item, total, active, errors, loaded } = useProgress();
 
   useEffect(() => {
-    if (fallbackDelayMs) {
-      const timeoutId = setTimeout(() => {
-        setShowFallback(true);
-        onShowFallback();
-      }, fallbackDelayMs);
+    // setSceneLoading({
+    //   ...sceneLoading,
+    //   item,
+    //   progress
+    // })
 
-      return () => {
-        clearInterval(timeoutId);
-      };
-    } else {
-      setShowFallback(true);
-      onShowFallback();
-    }
-  }, [fallbackDelayMs, onShowFallback]);
-
-  return showFallback ? fallback : null;
-};
-
-export const SmartSuspense = ({
-  children,
-  fallback,
-  fallbackDelayMs = 0,
-  fallbackMinDurationMs = 0,
-}) => {
-  const [isWaitingFallbackMinDurationMs, setIsWaitingFallbackMinDurationMs] =
-    useState(false);
-
-  const timeoutIdRef = useRef(undefined);
-
-  const startWaitingFallbackMinDurationMs = useCallback(() => {
-    setIsWaitingFallbackMinDurationMs(true);
-
-    timeoutIdRef.current && clearInterval(timeoutIdRef.current);
-    timeoutIdRef.current = setTimeout(() => {
-      setIsWaitingFallbackMinDurationMs(false);
-    }, fallbackMinDurationMs);
-  }, [fallbackMinDurationMs]);
-
-  useEffect(() => {
-    return () => timeoutIdRef.current && clearInterval(timeoutIdRef.current);
-  }, []);
+    console.log(active);
+  }, [active]);
 
   return (
-    <Suspense
-      fallback={
-        <FallbackDelayer
-          fallback={fallback}
-          fallbackDelayMs={fallbackDelayMs}
-          onShowFallback={startWaitingFallbackMinDurationMs}
-        />
-      }
-    >
-      {isWaitingFallbackMinDurationMs && <PromiseThrower />}
+    <Suspense fallback={null}>
       {children}
+      {/* <DoneLoading onLoaded={onLoaded} /> */}
     </Suspense>
   );
-};
+}
+
+function DoneLoading({ onLoaded }: { onLoaded: () => void }) {
+  useEffect(() => {
+    onLoaded();
+  }, []);
+
+  return <></>;
+}
