@@ -9,6 +9,8 @@ export interface ISceneStore {
   setShouldPlaySound: (setShouldPlaySound: boolean) => void;
   sceneLoading: any;
   setSceneLoading: (setSceneLoading: any) => void;
+  setShouldZoomCamera: (setShouldZoomCamera: boolean) => void;
+  shouldZoomCamera: boolean;
 }
 
 export const useSceneStore = create<ISceneStore>((set) => ({
@@ -22,4 +24,6 @@ export const useSceneStore = create<ISceneStore>((set) => ({
     isLoading: true,
   },
   setSceneLoading: (setSceneLoading: any) => set(() => ({ sceneLoading: setSceneLoading })),
+  shouldZoomCamera: false,
+  setShouldZoomCamera: (setShouldZoomCamera: boolean) => set(() => ({ shouldZoomCamera: setShouldZoomCamera })),
 }));

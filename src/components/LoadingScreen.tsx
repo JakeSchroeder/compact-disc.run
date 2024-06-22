@@ -22,9 +22,9 @@ export function LoadingScreen() {
               time. Surfing the so-called inter-webs. However, around the mid 2000s the enjoyment turned to stress and
               fatigue. Historians chalk it up to many tangentially related things.”
             </blockquote>
-            <div className="text-[20px] text-white text-opacity-70">- Tired Magazine (2024)</div>
+            <div className="text-[20px] leading-[20px] text-white text-opacity-70">- Tired Magazine (2024)</div>
           </div>
-          <div className="w-full text-xs max-w-lg space-y-3 pt-20">
+          <div className="w-full text-xs max-w-lg space-y-4 pt-20">
             <div className="flex justify-between items-center">
               <div className="text-white text-opacity-70">Loading...</div>
               <div className="text-white text-opacity-35">{sceneLoading.item}</div>

@@ -16,8 +16,6 @@ export function LoadingManager() {
       item,
       progress,
     });
-    console.log(item);
-    console.log(progress);
   }, [item, progress]);
 
   return <></>;

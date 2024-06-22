@@ -74,12 +74,12 @@ export function Artifacts({
               onPointerOver={() => {
                 if (currentSceneTitle === node.sceneTitle && !node.html) {
                   setCurrentHoveredArtifact(node.ref);
-                  setIsHovering(true);
+                  // setIsHovering(true);
                 }
               }}
               onPointerLeave={() => {
                 setCurrentHoveredArtifact(undefined);
-                setIsHovering(false);
+                // setIsHovering(false);
               }}
             />
           )}
