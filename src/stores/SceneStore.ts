@@ -9,6 +9,7 @@ export interface ISceneStore {
   setShouldPlaySound: (setShouldPlaySound: boolean) => void;
   sceneLoading: any;
   setSceneLoading: (setSceneLoading: any) => void;
+  
 }
 
 export const useSceneStore = create<ISceneStore>((set) => ({

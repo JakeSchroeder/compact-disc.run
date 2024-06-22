@@ -1,6 +1,5 @@
 import { useSceneStore } from "../../stores/SceneStore";
 import logo from "../../assets/svg/logo.svg";
-
 export function StartScreenHUD({
   pointerLockSelector,
 }: {
@@ -78,13 +77,11 @@ function PlayMenu() {
   const { setCurrentSceneIndex, setShouldPlaySound } = useSceneStore(
     (state) => state
   );
+
   return (
     <div className="flex flex-col w-[380px] absolute right-8 bottom-8  bg-black bg-opacity-70 z-10">
       <div className="p-8 text-white flex flex-col items-center space-y-4">
-        <h2 className="text-xl">
-          {/* <h2 className="text-xl before:content-[''] before:absolute before:h-px before:w-8 before:bg-white before:-left-12 before:top-1/2 after:content-[''] after:absolute after:h-px after:w-8 after:bg-white after:-right-12 after:top-1/2 relative"> */}
-          In game settings:
-        </h2>
+        <h2 className="text-xl">In game settings:</h2>
         <div className="space-y-3">
           <div className="flex">
             <input
@@ -125,6 +122,7 @@ function PlayMenu() {
           setCurrentSceneIndex(1);
           setShouldPlaySound(true);
         }}
+        onMouseEnter={() => {}}
       >
         PLAY
       </button>

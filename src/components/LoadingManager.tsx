@@ -1,6 +1,7 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";
 import { useSceneStore } from "../stores/SceneStore";
+import round from "lodash/round";
 
 export function LoadingManager() {
   //This seems very gross to me, like we should probably
@@ -11,13 +12,12 @@ export function LoadingManager() {
   const { progress, item } = useProgress();
 
   useEffect(() => {
+    console.log("progress", progress);
     setSceneLoading({
       ...sceneLoading,
       item,
-      progress,
+      progress: round(progress),
     });
-    console.log(item);
-    console.log(progress);
   }, [item, progress]);
 
   return <></>;
