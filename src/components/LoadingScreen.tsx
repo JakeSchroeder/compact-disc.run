@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSceneStore } from "../stores/SceneStore";
-import round from "lodash/round";
 
 export function LoadingScreen() {
   const sceneLoading = useSceneStore((state) => state.sceneLoading);
