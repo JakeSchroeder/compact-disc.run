@@ -1,8 +1,5 @@
-import { Environment } from "@react-three/drei";
-
 export const Lights = () => (
   <>
-    <Environment files={"/exrs/blue_photo_studio_2k.exr"} />
     <ambientLight intensity={0.2} />
     <pointLight
       name="pc"
@@ -36,20 +33,7 @@ export const Lights = () => (
       color="#ffdf9c"
       position={[-0.448, 2.469, -2.039]}
     />
-    <pointLight
-      intensity={1.5}
-      name="ceiling"
-      decay={2}
-      color="#ffdf9c"
-      position={[-0.466, 3.042, -0.183]}
-    />
-    <pointLight
-      intensity={2}
-      name="lamp"
-      decay={2}
-      distance={2.27}
-      color="#ffdf9c"
-      position={[0.72, 1.312, -2.223]}
-    />
+    <pointLight intensity={1.5} name="ceiling" decay={2} color="#ffdf9c" position={[-0.466, 3.042, -0.183]} />
+    <pointLight intensity={2} name="lamp" decay={2} distance={2.27} color="#ffdf9c" position={[0.72, 1.312, -2.223]} />
   </>
 );
