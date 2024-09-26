@@ -12,16 +12,16 @@ Feel free to take inspiration and use anything in this repo. When possible pleas
 
 Points of interest:
 
-- Starting with bespoke tightly coupled logic, and abstracting that into a single list of level definitions and making use of the scene graph.
-  - This was a huge unlock for me. Seeing the iterative gameloop as just one big struct and a series of components reacting to the current level really just about sums it all up.
-- Compressing things is good. gltf (.glb) binary format, mesh compression with Draco and KTX for crossplatform GPU texture formats.
+- Starting by building out gameplay as bespoke tightly coupled logic, and then abstracting that into a single list of level definitions and making use of the scene graph.
+  - This was a huge unlock for me. Seeing the iterative gameloop as just one big struct and a series of components reacting to the current level really just about sums it all up & showcases how ergonomic react is in this scenerio.
+- Compressing things is good. The gltf format specifically (.glb) that supports binary data works incredibly well. With the help of wasm, mesh compression with Draco and KTX for crossplatform GPU texture formats is possibly. It is really incredible how much is out there in the three.js ecosystem. Grab a decoder and encode away.
   - Via the power of gltf-transform (a cli tool for all things gltf) I was able to really dig deep and squeeze the most out of game assets optimized for the web. Its really incredible how good gltf has become and how web standards have propogated into other formats. 
-- Very lightweight global state. (Probably could get rid of it entirely for such a simple game loop, but avoid some prop drilling.)
-  - One of the biggest strengths of react and js in general is how event driven it is and how well that maps to implementing a game loop. Make the data you need for a level globally avaliable at at all times, read state from it and write state to it. Let react handle the rest. Works surprising well.
-- Realtime physics. Rapier-js integrated with r3f is truly remarkable. Web Assembly makes quick work of them rigid body calcs.
-  - I must admit I feel pretty dang lucky I get to use libs like rapier and nearly all the implementation is obscured away behind the iron gate of npm. After 3 months or so of investigation regarding real time physics and different approaches, I think rapier was the right call here. I could remove the need for physics all together... but for what I have planned it cool to have it.
-- Screen space shaders highlight effects are dead simple with r3f post processing... it really is like cheating.
-  - Again as someone who has attempted to build a lot of these effects in opengl I am GRATEFUL to be able to just import {PostProcessing} from 'r3f' and call it a day. Absurd.
+- Very lightweight global state. (Probably could get rid of it entirely for such a simple game loop, but avoided some prop drilling which is pretty.)
+  - One of the biggest strengths of react and js in general is how you think event driven, and how well that maps to implementing a game loop. Make the data you need for a level globally avaliable at at all times, read from it, and write to it. Let react handle the rest. Works surprising well, especially when working with GUIs and updating the rest of the scene. Its all the same part of your brain.
+- Realtime physics. Rapier-js integrated with r3f is truly remarkable. Web Assembly makes quick work of them rigid body calcs. And from my profiling doesnt impact perf all that much. Even on weak hardware.
+  - I must admit I feel pretty dang lucky I get to use libs like rapier and nearly all the implementation is obscured away behind the iron gate of npm. After 3 months or so of investigation regarding real time physics and different approaches, I think rapier was the right call here. I could remove the need for physics all together... but for what I have planned in the future ill need it.
+- Screen space shaders like the highlight effect on hover are dead simple with r3f post processing <Outline/> component... it really is like cheating.
+  - Again as someone who has attempted to build a lot of these effects in opengl I am GRATEFUL to be able to just import {PostProcessing} from 'r3f' and call it a day. Absurdly powerful.
 
 Roadmap:
 
@@ -35,6 +35,6 @@ Roadmap:
 
 Aside:
 
-I am labeling this game and codebase as very much alpha. The game loop is working but theres still 20% of refinement that could be added. I welcome anyone to submit PR's to potentially make perf improvements. Or even take code/assets for their own game. I think there is def some re-rendering going on but havent spent the time to track down.
+I am labeling this game and codebase as very much alpha. The game loop is working but theres still 20% of refinement that could be added. And some cross browser issues worth fixing (cough cough safari.) I welcome anyone to submit PR's to potentially make perf improvements. Or even take code/assets for your own game. I think there is def some perf pitfalls regarding re-rendering but I dont feel the need to optimize further... yet.
 
 Thanks for reading :) 
