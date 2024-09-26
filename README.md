@@ -2,9 +2,9 @@
 
 # Compact Disc (v1.1)
 
-Compact disc is a project I started in efforts to make the web weird again. As an indie game dev... I look back on the times of Flash and how prolific "fun and weird" was on the internet. After the death of Flash there has been a TON of advancements in creating game experiences in the browser, harnessing new tech like web assembly and wgpu makes it arguably a better experience today. Frameworks like react and react-three-fiber offer a set of primitives to do just about anything. The community is growing and im hoping the web as a platform matures into a viable target for fully fledged titles.
+Compact disc is a project I started in efforts to make the web weird again. As an indie game dev... I look back on the times of Flash and how prolific "fun and weird" was on the internet. After the death of Flash there has been a TON of advancements in creating game experiences in the browser, harnessing canvas and exploring new tech like web assembly and wgpu makes it arguably a better experience today. Frameworks like react and react-three-fiber offer a set of primitives to do just about anything. The community is growing and a lot of editor like experiences are making it easier to build in, im hoping the web as a platform matures into a viable target for fully fledged titles.
 
-*Disclaimer: Much of this project was getting my feet wet in 3D art asset pipelines (psx style is kind of my jam), so the goal was to hand craft every pixel. I challenged myself to model every asset, texture every asset with pictures taken from my phone, and audio effects recorded from my desktop microphone. Homegrown if you will. Secondary to this was to implement all of the gameplay interaction in react. I could have reached for a game engine that supported canvas... but I wanted to go through assembling the "engine" myself. You can see a fun breakdown on my twitter https://x.com/Schrudmeister/status/1796823931539673334*
+*Disclaimer: Much of this project was getting my feet wet in 3D art asset pipelines (psx style is kind of my jam), so the goal was to hand craft every pixel. I challenged myself to model every asset, texture every asset with pictures taken from my phone, and audio effects recorded from my desktop microphone. Homegrown if you will. Secondary to this was to implement all of the gameplay interaction in react. I could have reached for a game engine that supported canvas... but I wanted to go through assembling the "engine" myself. You can see a fun breakdown on my twitter https://x.com/Schrudmeister/status/1796823931539673334 And of course... create an experience unlock anything you would come across regarding someones portfolio.*
 
 Feel free to take inspiration and use anything in this repo. When possible please give me credit for the original work.
 
@@ -37,4 +37,4 @@ Aside:
 
 I am labeling this game and codebase as very much alpha. The game loop is working but theres still 20% of refinement that could be added. And some cross browser issues worth fixing (cough cough safari.) I welcome anyone to submit PR's to potentially make perf improvements. Or even take code/assets for your own game. I think there is def some perf pitfalls regarding re-rendering but I dont feel the need to optimize further... yet.
 
-Thanks for reading :) 
+Thanks for reading, if you are curious about anything or just want to chat feel free to reach out. jakeschroeder8@gmail.com :) 
