@@ -1,55 +1,73 @@
-import * as THREE from "three";
-import * as RAPIER from "@dimforge/rapier3d-compat";
 import { useRef } from "react";
-import { useThree, useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
-import { CapsuleCollider, RapierRigidBody, RigidBody, useRapier } from "@react-three/rapier";
+import * as THREE from "three";
 
 const SPEED = 4;
+const PLAYER_HEIGHT = 1.1;
+const JUMP_FORCE = 0.15;
+const GRAVITY = 0.007;
+const BOUNDS = {
+  minX: -2,
+  maxX: 2,
+  minZ: -2,
+  maxZ: 2,
+};
+
 const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
 
-export function Player({ isPlayer }: { isPlayer?: boolean }) {
-  const ref = useRef<RapierRigidBody>(null);
-  const rapier = useRapier();
-  const { camera } = useThree();
+export function Player() {
+  const position = useRef<THREE.Vector3>(new THREE.Vector3(0, PLAYER_HEIGHT / 2, 0));
+  const velocity = useRef<number>(0);
+  const isJumping = useRef<boolean>(false);
+  const { camera, invalidate } = useThree();
   const [_, getKeyboard] = useKeyboardControls();
+
   useFrame(() => {
-    if (!isPlayer) return;
     const { forward, backward, left, right, jump } = getKeyboard();
 
-    if (ref.current) {
-      const velocity = ref.current.linvel();
-
-      // update camera
-      camera.position.set(ref.current.translation().x, ref.current.translation().y + 0.5, ref.current.translation().z);
-
-      // movement
-      frontVector.set(0, 0, (backward ? 1 : 0) - (forward ? 1 : 0));
-      sideVector.set((left ? 1 : 0) - (right ? 1 : 0), 0, 0);
-      direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(camera.rotation);
-      ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z }, true);
-
-      const world = rapier.world;
-      //@ts-expect-error hehe
-      const ray = world.castRay(new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 }));
-      const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75;
-      if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 }, true);
+    // Handle jumping
+    if (jump && !isJumping.current) {
+      velocity.current = JUMP_FORCE;
+      isJumping.current = true;
     }
+
+    // Apply gravity and update vertical position
+    velocity.current -= GRAVITY;
+    position.current.y += velocity.current;
+
+    // Check ground collision
+    if (position.current.y <= PLAYER_HEIGHT / 2) {
+      position.current.y = PLAYER_HEIGHT / 2;
+      velocity.current = 0;
+      isJumping.current = false;
+    }
+
+    frontVector.set(0, 0, (backward ? 1 : 0) - (forward ? 1 : 0));
+    sideVector.set((left ? 1 : 0) - (right ? 1 : 0), 0, 0);
+    direction
+      .subVectors(frontVector, sideVector)
+      .normalize()
+      .multiplyScalar(SPEED / 60)
+      .applyEuler(camera.rotation);
+
+    direction.y = 0;
+
+    // Calculate new position
+    const newX = THREE.MathUtils.clamp(position.current.x + direction.x, BOUNDS.minX, BOUNDS.maxX);
+    const newZ = THREE.MathUtils.clamp(position.current.z + direction.z, BOUNDS.minZ, BOUNDS.maxZ);
+
+    // Update position with clamped values
+    position.current.setX(newX);
+    position.current.setZ(newZ);
+
+    // Update camera position
+    camera.position.set(position.current.x, position.current.y + PLAYER_HEIGHT, position.current.z);
+
+    invalidate();
   });
-  return (
-    <>
-      <RigidBody
-        ref={ref}
-        colliders={false}
-        mass={0}
-        type="dynamic"
-        position={[0, 2, 0]}
-        enabledRotations={[false, false, false]}
-      >
-        <CapsuleCollider args={[0.75, 0.5]} />
-      </RigidBody>
-    </>
-  );
+
+  return null;
 }

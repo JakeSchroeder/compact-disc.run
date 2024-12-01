@@ -1,6 +1,5 @@
 import { Canvas } from "@react-three/fiber";
 import { BaseSceneModel } from "./BaseSceneModel";
-import { Physics } from "@react-three/rapier";
 import { useSceneStore } from "../stores/SceneStore";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
@@ -19,56 +18,30 @@ import { LoadingManager } from "./LoadingManager";
 import round from "lodash/round";
 
 export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } =
-    useSceneStore((state) => state);
-  const {
-    hudProps,
-    cameraProps,
-    isPlayer,
-    title: currentSceneTitle,
-  } = allScenesList[currentSceneIndex];
+  const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
+  const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
   const [viewDPR, setViewDPR] = useState(1);
   return (
-    <div
-      id="canvas-container"
-      className="w-full h-full relative hidden lg:block"
-    >
+    <div id="canvas-container" className="w-full h-full relative hidden lg:block">
       <KeyboardControls>
-        <HUDController
-          hudProps={hudProps}
-          currentSceneTitle={currentSceneTitle}
-          isPlayer={isPlayer}
-        />
+        <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
         {shouldPlaySound && <SoundController />}
-        <Canvas
-          dpr={viewDPR}
-          frameloop="demand"
-          className="w-full h-full relative"
-        >
+        <Canvas dpr={viewDPR} frameloop="demand" className="w-full h-full relative">
           <LoadingManager />
           <Suspense fallback={null}>
             <DoneLoading setSceneLoading={setSceneLoading} />
-            <PerformanceMonitor
-              onChange={({ factor }) =>
-                setViewDPR(round(0.5 + 1.5 * factor, 1))
-              }
-            >
+            <PerformanceMonitor onChange={({ factor }) => setViewDPR(round(0.5 + 1.5 * factor, 1))}>
               <EffectComposer autoClear={false}>
                 <PostProcessing />
-                <Physics gravity={[0, -30, 0]}>
-                  <CameraController cameraProps={cameraProps} />
-                  <Artifacts
-                    currentSceneTitle={currentSceneTitle}
-                    setIsHovering={setIsHovering}
-                    currentSceneIndex={currentSceneIndex}
-                  />
-                  <Player isPlayer={isPlayer} />
-                  <BaseSceneModel />
-                </Physics>
-                <PointerControls
-                  isPlayer={isPlayer}
-                  pointerLockSelector={currentSceneTitle}
+                <CameraController cameraProps={cameraProps} />
+                <Artifacts
+                  currentSceneTitle={currentSceneTitle}
+                  setIsHovering={setIsHovering}
+                  currentSceneIndex={currentSceneIndex}
                 />
+                {isPlayer && <Player />}
+                <BaseSceneModel />
+                <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
                 <Lights />
               </EffectComposer>
             </PerformanceMonitor>
@@ -79,11 +52,7 @@ export default function Game() {
   );
 }
 
-function DoneLoading({
-  setSceneLoading,
-}: {
-  setSceneLoading: (sceneLoading: any) => void;
-}) {
+function DoneLoading({ setSceneLoading }: { setSceneLoading: (sceneLoading: any) => void }) {
   useEffect(() => {
     setSceneLoading({
       isLoading: false,

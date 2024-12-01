@@ -1,15 +1,9 @@
 import { useSceneStore } from "../../stores/SceneStore";
 import logo from "../../assets/svg/logo.svg";
-export function StartScreenHUD({
-  pointerLockSelector,
-}: {
-  pointerLockSelector: string;
-}) {
+import { useState } from "react";
+export function StartScreenHUD({ pointerLockSelector }: { pointerLockSelector: string }) {
   return (
-    <div
-      id={pointerLockSelector}
-      className="absolute inset-0 w-full h-full z-50"
-    >
+    <div id={pointerLockSelector} className="absolute inset-0 w-full h-full z-50">
       <div className="w-[420px] flex flex-col overflow-hidden text-white bg-black bg-opacity-70 absolute left-8 top-8 bottom-8 z-10">
         <div className="p-8 bg-black">
           <img src={logo} alt="logo" className="w-full h-40" />
@@ -20,10 +14,8 @@ export function StartScreenHUD({
             <div className="space-y-2">
               <h2 className="text-xl">Read me</h2>
               <p className="text-white text-opacity-70">
-                It is my pleasure to inform you of your successful user
-                candidacy. You have been selected to be the{" "}
-                <span className="text-base text-white">[83th]</span> player of
-                my game.
+                It is my pleasure to inform you of your successful user candidacy. You have been selected to be the{" "}
+                <span className="text-base text-white">[83th]</span> player of my game.
               </p>
             </div>
             <div className="h-px bg-white bg-opacity-30 w-full"></div>
@@ -40,11 +32,7 @@ export function StartScreenHUD({
             <div className="space-y-2">
               <h2 className="text-xl">
                 Changelog [
-                <a
-                  className="underline text-base"
-                  href="/changelog.txt"
-                  target="_blank"
-                >
+                <a className="underline text-base" href="/changelog.txt" target="_blank">
                   Read all
                 </a>
                 ]
@@ -74,9 +62,11 @@ export function StartScreenHUD({
 }
 
 function PlayMenu() {
-  const { setCurrentSceneIndex, setShouldPlaySound } = useSceneStore(
-    (state) => state
-  );
+  const { setCurrentSceneIndex, setShouldPlaySound } = useSceneStore((state) => state);
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(true);
+  const [isCreditsOn, setIsCreditsOn] = useState(true);
 
   return (
     <div className="flex flex-col w-[380px] absolute right-8 bottom-8  bg-black bg-opacity-70 z-10">
@@ -85,44 +75,48 @@ function PlayMenu() {
         <div className="space-y-3">
           <div className="flex">
             <input
-              onChange={() => {}}
-              checked
-              value="1"
+              onChange={(e) => {
+                setIsSoundOn(e.currentTarget.checked);
+              }}
+              checked={isSoundOn}
               type="checkbox"
               className="mr-2"
             />
-            <label>Play sound? [Yes]</label>
+            <label>Play sound? {isSoundOn ? "[Yes]" : "[No]"}</label>
           </div>
           <div className="flex">
             <input
-              onChange={() => {}}
-              checked
-              value="1"
+              onChange={(e) => {
+                setIsFullscreen(e.currentTarget.checked);
+              }}
+              checked={isFullscreen}
               type="checkbox"
               className="mr-2"
             />
-            <label>Fullscreen? [Yes]</label>
+            <label>Fullscreen? {isFullscreen ? "[Yes]" : "[No]"}</label>
           </div>
           <div className="flex">
             <input
-              onChange={() => {}}
-              checked
-              value="1"
+              onChange={(e) => {
+                setIsCreditsOn(e.currentTarget.checked);
+              }}
+              checked={isCreditsOn}
               type="checkbox"
               className="mr-2"
             />
-            <label>Show credits? [Yes]</label>
+            <label>Show credits? {isCreditsOn ? "[Yes]" : "[No]"}</label>
           </div>
         </div>
       </div>
       <button
         className="border-2 border-white border-opacity-30 h-24 text-4xl text-white bg-black hover:border-opacity-100"
         onClick={() => {
-          document.body.requestFullscreen();
+          if (isFullscreen) {
+            document.body.requestFullscreen();
+          }
+          setShouldPlaySound(isSoundOn);
           setCurrentSceneIndex(1);
-          setShouldPlaySound(true);
         }}
-        onMouseEnter={() => {}}
       >
         PLAY
       </button>
