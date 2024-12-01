@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { invalidate, useFrame, useThree } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -18,14 +18,14 @@ const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
 
-export function Player() {
+export function Player({ isPlayer }) {
   const position = useRef<THREE.Vector3>(new THREE.Vector3(0, PLAYER_HEIGHT / 2, 0));
   const velocity = useRef<number>(0);
   const isJumping = useRef<boolean>(false);
-  const { camera, invalidate } = useThree();
   const [_, getKeyboard] = useKeyboardControls();
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
+    if (!isPlayer) return;
     const { forward, backward, left, right, jump } = getKeyboard();
 
     // Handle jumping

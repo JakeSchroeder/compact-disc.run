@@ -39,7 +39,7 @@ export default function Game() {
                   setIsHovering={setIsHovering}
                   currentSceneIndex={currentSceneIndex}
                 />
-                {isPlayer && <Player />}
+                <Player isPlayer={isPlayer} />
                 <BaseSceneModel />
                 <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
                 <Lights />
