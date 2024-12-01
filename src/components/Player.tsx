@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { invalidate, useFrame, useThree } from "@react-three/fiber";
+import { invalidate, useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -18,7 +18,7 @@ const direction = new THREE.Vector3();
 const frontVector = new THREE.Vector3();
 const sideVector = new THREE.Vector3();
 
-export function Player({ isPlayer }) {
+export function Player({ isPlayer }: { isPlayer: boolean | undefined }) {
   const position = useRef<THREE.Vector3>(new THREE.Vector3(0, PLAYER_HEIGHT / 2, 0));
   const velocity = useRef<number>(0);
   const isJumping = useRef<boolean>(false);
