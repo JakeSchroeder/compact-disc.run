@@ -15,7 +15,7 @@ import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { LoadingManager } from "./LoadingManager";
-import round from "lodash/round";
+import { Perf } from "r3f-perf";
 
 export default function Game() {
   const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
@@ -30,7 +30,7 @@ export default function Game() {
           <LoadingManager />
           <Suspense fallback={null}>
             <DoneLoading setSceneLoading={setSceneLoading} />
-            <PerformanceMonitor onChange={({ factor }) => setViewDPR(round(0.5 + 1.5 * factor, 1))}>
+            <PerformanceMonitor onChange={({ factor }) => setViewDPR(Math.round(0.5 + 1.5 * factor))}>
               <EffectComposer autoClear={false}>
                 <PostProcessing />
                 <CameraController cameraProps={cameraProps} />
@@ -45,6 +45,7 @@ export default function Game() {
                 <Lights />
               </EffectComposer>
             </PerformanceMonitor>
+            <Perf />
           </Suspense>
         </Canvas>
       </KeyboardControls>

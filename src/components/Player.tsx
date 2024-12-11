@@ -3,10 +3,10 @@ import { invalidate, useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 
-const SPEED = 4;
+const SPEED = 2.3;
 const PLAYER_HEIGHT = 1.1;
-const JUMP_FORCE = 0.15;
-const GRAVITY = 0.007;
+const JUMP_FORCE = 0.1;
+const GRAVITY = 0.003;
 const BOUNDS = {
   minX: -2,
   maxX: 2,
