@@ -23,7 +23,7 @@ Points of interest:
 
 Roadmap:
 
-- [ ] Camera bounds (its kind of fun clipping through the wall tho)
+- [x] Camera bounds (its kind of fun clipping through the wall tho)
 - [ ] Start screen camera transition (i have a bunch of camera dolly effects i want to add)
 - [ ] FPS desk controls with focus pull (better immersion, more compelling story telling)
 - [ ] Playable turn table with song list (probs need a seperate texture atlas to make uv stuff easier.)
