@@ -15,7 +15,6 @@ import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { LoadingManager } from "./LoadingManager";
-import { Perf } from "r3f-perf";
 
 export default function Game() {
   const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
@@ -45,7 +44,6 @@ export default function Game() {
                 <Lights />
               </EffectComposer>
             </PerformanceMonitor>
-            <Perf />
           </Suspense>
         </Canvas>
       </KeyboardControls>

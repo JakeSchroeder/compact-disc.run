@@ -28,17 +28,14 @@ export function Player({ isPlayer }: { isPlayer: boolean | undefined }) {
     if (!isPlayer) return;
     const { forward, backward, left, right, jump } = getKeyboard();
 
-    // Handle jumping
     if (jump && !isJumping.current) {
       velocity.current = JUMP_FORCE;
       isJumping.current = true;
     }
 
-    // Apply gravity and update vertical position
     velocity.current -= GRAVITY;
     position.current.y += velocity.current;
 
-    // Check ground collision
     if (position.current.y <= PLAYER_HEIGHT / 2) {
       position.current.y = PLAYER_HEIGHT / 2;
       velocity.current = 0;
@@ -55,15 +52,12 @@ export function Player({ isPlayer }: { isPlayer: boolean | undefined }) {
 
     direction.y = 0;
 
-    // Calculate new position
     const newX = THREE.MathUtils.clamp(position.current.x + direction.x, BOUNDS.minX, BOUNDS.maxX);
     const newZ = THREE.MathUtils.clamp(position.current.z + direction.z, BOUNDS.minZ, BOUNDS.maxZ);
 
-    // Update position with clamped values
     position.current.setX(newX);
     position.current.setZ(newZ);
 
-    // Update camera position
     camera.position.set(position.current.x, position.current.y + PLAYER_HEIGHT, position.current.z);
 
     invalidate();
