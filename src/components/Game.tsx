@@ -15,9 +15,10 @@ import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { LoadingManager } from "./LoadingManager";
+import { useLoadingStore } from "../stores/LoadingStore";
 
-export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
+export function Game() {
+  const { currentSceneIndex, setIsHovering, shouldPlaySound } = useSceneStore((state) => state);
   const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
   const [viewDPR, setViewDPR] = useState(1);
   return (
@@ -28,7 +29,7 @@ export default function Game() {
         <Canvas dpr={viewDPR} frameloop="demand" className="w-full h-full relative">
           <LoadingManager />
           <Suspense fallback={null}>
-            <DoneLoading setSceneLoading={setSceneLoading} />
+            <DoneLoading />
             <PerformanceMonitor onChange={({ factor }) => setViewDPR(Math.round(0.5 + 1.5 * factor))}>
               <EffectComposer autoClear={false}>
                 <PostProcessing />
@@ -44,6 +45,7 @@ export default function Game() {
                 <Lights />
               </EffectComposer>
             </PerformanceMonitor>
+            {/* <PreloadedDOMAssets/> */}
           </Suspense>
         </Canvas>
       </KeyboardControls>
@@ -51,11 +53,14 @@ export default function Game() {
   );
 }
 
-function DoneLoading({ setSceneLoading }: { setSceneLoading: (sceneLoading: any) => void }) {
+function DoneLoading() {
+  const { setSceneLoading } = useLoadingStore((state) => state);
   useEffect(() => {
-    setSceneLoading({
-      isLoading: false,
-    });
-  }, []);
+    setTimeout(() => {
+      setSceneLoading({
+        isLoading: false,
+      });
+    }, 2000);
+  }, [setSceneLoading]);
   return <></>;
 }
