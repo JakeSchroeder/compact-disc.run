@@ -1,11 +1,13 @@
-import { createRef, Fragment, RefObject, useMemo, useRef, useState } from "react";
+import { createRef, Fragment, RefObject, useMemo, useState } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
 import { MacOS } from "./MacOS";
 import { ScreenSaver } from "./ScreenSaver";
 import { useCurrentSceneIndex, useSceneTitle, useSetIsHovering } from "../stores/SceneStore";
-import { useBaseSceneModel } from "./useBaseSceneModel";
+import { useGLTF } from "@react-three/drei";
+import { KTX2Loader } from "three/examples/jsm/Addons.js";
+import { useThree } from "@react-three/fiber";
 
 const htmlComponents = {
   screensaver: <ScreenSaver />,
@@ -18,7 +20,13 @@ export function Artifacts() {
   const setIsHovering = useSetIsHovering();
   const currentSceneIndex = useCurrentSceneIndex();
 
-  const { nodes, materials } = useBaseSceneModel();
+  const { gl } = useThree();
+
+  const { nodes, materials } = useGLTF("/models/scene-draco-ktx.glb", true, false, (loader) => {
+    const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
+    //@ts-ignore
+    loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
+  });
 
   const nodeList = useMemo(
     () =>
@@ -35,6 +43,20 @@ export function Artifacts() {
   );
 
   const [currentHoveredArtifact, setCurrentHoveredArtifact] = useState<RefObject<any> | undefined>(undefined);
+
+  const baseMesh = useMemo(
+    () => (
+      <mesh
+        castShadow
+        receiveShadow
+        //@ts-ignore
+        geometry={nodes.base.geometry}
+        material={materials.environment}
+      />
+    ),
+    //@ts-ignore
+    [nodes.base.geometry, materials.environment]
+  );
 
   return (
     <>
@@ -72,6 +94,7 @@ export function Artifacts() {
           )}
         </Fragment>
       ))}
+      {baseMesh}
     </>
   );
 }

@@ -4,12 +4,10 @@ import { CSSProperties, Fragment, useState } from "react";
 //FUTURE: add current date time subtract by 10 minutes.
 const readme = (
   <p className="">
-    If you are reading this... well by god, the inter dimensional load balancer
-    worked! <br />
+    If you are reading this... well by god, the inter dimensional load balancer worked! <br />
     <br />
-    Or shall I say, sort of worked... It seems, you are stuck in here and I
-    don't have anyway to reboot the servers and get you out. There is a door in
-    the back but its locked and needs a pin.
+    Or shall I say, sort of worked... It seems, you are stuck in here and I don't have anyway to reboot the servers and
+    get you out. There is a door in the back but its locked and needs a pin.
     <br />
     <br />
     There's gotta be a way to get that pin...
@@ -18,14 +16,12 @@ const readme = (
 
 const decryptReadme = (
   <p className="">
-    Good news, I ran some AI event prediction models and it seems like the door
-    pin is hidden in the encrypted file. <br /> <br />
+    Good news, I ran some AI event prediction models and it seems like the door pin is hidden in the encrypted file.{" "}
+    <br /> <br />
     We just need to figure out a way to get into it. <br /> <br />
-    Also, worth noting the AI model decided to take a nap halfway through the
-    prediction. And so we had to do a dump of the token state... unfort you will
-    have to manually look for any patterns associated with the data. See if
-    theres any patterns of numbers etc. Who knows these DARPA guys always leave
-    a back door.
+    Also, worth noting the AI model decided to take a nap halfway through the prediction. And so we had to do a dump of
+    the token state... unfort you will have to manually look for any patterns associated with the data. See if theres
+    any patterns of numbers etc. Who knows these DARPA guys always leave a back door.
   </p>
 );
 
@@ -66,10 +62,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
             }
           >
             <div className="bg-[url(/os/shadow.png)] opacity-70 bg-cover absolute inset-0 w-full h-full z-50 pointer-events-none"></div>
-            {/* <div className="bg-[url(/os/dust.png)] bg-opacity-15 bg-cover absolute inset-0 w-full h-full z-40 pointer-events-none"></div> */}
-            <header
-              className={`${surfaceClassNames} -mt-px px-2 h-6 w-full text-sm`}
-            >
+            <header className={`${surfaceClassNames} -mt-px px-2 h-6 w-full text-sm`}>
               <div className="relative h-full w-full flex items-center justify-between ">
                 <div className="flex items-center space-x-4 h-full">
                   {[
@@ -111,10 +104,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                             }, 5000);
                           }}
                         >
-                          <img
-                            className="w-5 h-5 -ml-1"
-                            src="/os/apple-pixel.png"
-                          />
+                          <img className="w-5 h-5 -ml-1" src="/os/apple-pixel.png" />
                         </button>
                       ) : (
                         <button
@@ -178,10 +168,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                       left: index * 32,
                     }}
                     className={`${
-                      currentPopover.title === item.title &&
-                      currentPopover.show === true
-                        ? "block"
-                        : "hidden"
+                      currentPopover.title === item.title && currentPopover.show === true ? "block" : "hidden"
                     } ${surfaceClassNames} min-w-16 min-h-full absolute top-[24px] z-10 left-0 bg-[--surface] border-r border-black shadow-[3px_0px_0_#222222]`}
                   >
                     {item.items.map((item, index) => (
@@ -204,10 +191,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                     type="number"
                     className="w-full h-10 border border-dotted border-black"
                     onChange={(e) => {
-                      if (
-                        Number.parseInt(e.target.value) ===
-                        2001200220042008200920102013201420152016201720182022
-                      ) {
+                      if (Number.parseInt(e.target.value) === 2001200220042008200920102013201420152016201720182022) {
                         setIsDecrypt(true);
                       }
                     }}
@@ -239,10 +223,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                       {Array(6)
                         .fill(0)
                         .map((_, index) => (
-                          <div
-                            key={index}
-                            className="border-t border-t-white h-px border-b border-b-[--border]"
-                          ></div>
+                          <div key={index} className="border-t border-t-white h-px border-b border-b-[--border]"></div>
                         ))}
                     </div>
                     <div>Readme.txt</div>
@@ -250,10 +231,7 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                       {Array(6)
                         .fill(0)
                         .map((_, index) => (
-                          <div
-                            key={index}
-                            className="border-t border-t-white h-px border-b border-b-[--border]"
-                          ></div>
+                          <div key={index} className="border-t border-t-white h-px border-b border-b-[--border]"></div>
                         ))}
                     </div>
                   </header>
@@ -277,34 +255,25 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
               {/* Macintosh HD desktop file */}
               <div className="absolute top-5 right-10 flex space-y-1 flex-col items-center cursor-not-allowed">
                 <img src="/os/hd.png" className="w-10" />
-                <div className="bg-white bg-opacity-35 px-1 text-sm">
-                  Macintosh HD
-                </div>
+                <div className="bg-white bg-opacity-35 px-1 text-sm">Macintosh HD</div>
               </div>
               {/* Readme desktop file */}
               <div className="absolute top-32 right-10 flex space-y-1 flex-col items-center cursor-pointer">
                 <img src="/os/document.png" className="w-10" />
-                <div className="bg-white bg-opacity-90 border border-black px-1 text-sm">
-                  Readme.txt
-                </div>
+                <div className="bg-white bg-opacity-90 border border-black px-1 text-sm">Readme.txt</div>
               </div>
               {/* Readme desktop file */}
               <div
                 className={`absolute top-56 right-10 flex space-y-1 flex-col items-center ${
-                  sceneTitle === "DECRYPT"
-                    ? "cursor-pointer"
-                    : "cursor-not-allowed "
+                  sceneTitle === "DECRYPT" ? "cursor-pointer" : "cursor-not-allowed "
                 }`}
                 onClick={() => {
-                  if (sceneTitle === "DECRYPT")
-                    setShowDecryptPopup(!showDecryptPopup);
+                  if (sceneTitle === "DECRYPT") setShowDecryptPopup(!showDecryptPopup);
                 }}
               >
                 <img src="/os/27.png" className="w-10" />
                 <div
-                  className={`bg-white ${
-                    sceneTitle === "DECRYPT" ? "bg-opacity-90" : "bg-opacity-35"
-                  } px-1 text-sm`}
+                  className={`bg-white ${sceneTitle === "DECRYPT" ? "bg-opacity-90" : "bg-opacity-35"} px-1 text-sm`}
                 >
                   Encrypted_Keypad_Stuff.zip
                 </div>

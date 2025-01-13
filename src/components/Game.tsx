@@ -1,5 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { BaseSceneModel } from "./BaseSceneModel";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
 import { Lights } from "./Lights";
@@ -35,7 +34,6 @@ export function Game() {
                 <CameraController />
                 <Artifacts />
                 <Player />
-                <BaseSceneModel />
                 <PointerControls />
                 <Lights />
                 {ENV_SETTING === "DEBUG" ? <Perf /> : <></>}
