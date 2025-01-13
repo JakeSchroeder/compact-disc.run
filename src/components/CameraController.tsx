@@ -1,6 +1,8 @@
 import { PerspectiveCamera } from "@react-three/drei";
+import { useCameraProps } from "../stores/SceneStore";
 
-export function CameraController({ cameraProps }: { cameraProps: any }) {
+export function CameraController() {
+  const cameraProps = useCameraProps();
   return (
     <>
       <PerspectiveCamera

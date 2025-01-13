@@ -55,7 +55,7 @@ export function StartScreenHUD({ pointerLockSelector }: { pointerLockSelector: s
       <p className="text-center absolute bottom-8 left-1/2 -translate-x-1/2 text-xs text-white text-opacity-30">
         Version 1.111111111111111 (random-hash-thing-token-build-id)
         <br />
-        Copyright © 2024 Jake Schroeder. All rights reserved.
+        Copyright © {new Date().getUTCFullYear()} Jake Schroeder. All rights reserved.
       </p>
     </div>
   );

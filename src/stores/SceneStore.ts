@@ -1,26 +1,63 @@
 import { create } from "zustand";
+import { allScenesList, TScene } from "../lib/sceneUIData";
+import { useMemo } from "react";
 
-export interface ISceneStore {
+interface ISceneState {
   currentSceneIndex: number;
-  setCurrentSceneIndex: (sceneIndex: number) => void;
   isHovering: boolean;
-  setIsHovering: (setIsHovering: boolean) => void;
   shouldPlaySound: boolean;
-  setShouldPlaySound: (setShouldPlaySound: boolean) => void;
-  sceneLoading: any;
-  setSceneLoading: (setSceneLoading: any) => void;
-  
 }
 
-export const useSceneStore = create<ISceneStore>((set) => ({
+interface ISceneActions {
+  setCurrentSceneIndex: (sceneIndex: number) => void;
+  setIsHovering: (isHovering: boolean) => void;
+  setShouldPlaySound: (shouldPlaySound: boolean) => void;
+}
+
+type ISceneStore = ISceneState & ISceneActions;
+
+const useSceneStore = create<ISceneStore>((set) => ({
   currentSceneIndex: 0,
-  setCurrentSceneIndex: (sceneIndex: number) => set(() => ({ currentSceneIndex: sceneIndex })),
   isHovering: false,
   shouldPlaySound: false,
-  setIsHovering: (setIsHovering: boolean) => set(() => ({ isHovering: setIsHovering })),
-  setShouldPlaySound: (setShouldPlaySound: boolean) => set(() => ({ shouldPlaySound: setShouldPlaySound })),
-  sceneLoading: {
-    isLoading: true,
-  },
-  setSceneLoading: (setSceneLoading: any) => set(() => ({ sceneLoading: setSceneLoading })),
+
+  setCurrentSceneIndex: (sceneIndex: number) => set({ currentSceneIndex: sceneIndex }),
+  setIsHovering: (isHovering: boolean) => set({ isHovering }),
+  setShouldPlaySound: (shouldPlaySound: boolean) => set({ shouldPlaySound }),
 }));
+
+// Atomic selectors
+export const useCurrentSceneIndex = () => useSceneStore((state) => state.currentSceneIndex);
+export const useIsHovering = () => useSceneStore((state) => state.isHovering);
+export const useShouldPlaySound = () => useSceneStore((state) => state.shouldPlaySound);
+export const useSetCurrentSceneIndex = () => useSceneStore((state) => state.setCurrentSceneIndex);
+export const useSetIsHovering = () => useSceneStore((state) => state.setIsHovering);
+export const useSetShouldPlaySound = () => useSceneStore((state) => state.setShouldPlaySound);
+
+// Memoized computed selectors
+export const useCurrentScene = () => {
+  const currentSceneIndex = useCurrentSceneIndex();
+  return useMemo(() => allScenesList[currentSceneIndex], [currentSceneIndex]);
+};
+
+export const useHudProps = () => {
+  const currentScene = useCurrentScene();
+  return useMemo(() => currentScene.hudProps, [currentScene]);
+};
+
+export const useCameraProps = () => {
+  const currentScene = useCurrentScene();
+  return useMemo(() => currentScene.cameraProps, [currentScene]);
+};
+
+export const useIsPlayer = () => {
+  const currentScene = useCurrentScene();
+  return useMemo(() => currentScene.isPlayer ?? false, [currentScene]);
+};
+
+export const useSceneTitle = () => {
+  const currentScene = useCurrentScene();
+  return useMemo(() => currentScene.title, [currentScene]);
+};
+
+export { useSceneStore };

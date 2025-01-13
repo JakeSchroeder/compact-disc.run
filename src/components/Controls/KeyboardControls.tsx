@@ -1,7 +1,6 @@
 import { KeyboardControls as KeyBoardControls } from "@react-three/drei";
 import { useEffect } from "react";
-import { useSceneStore } from "../../stores/SceneStore";
-import { allScenesList } from "../../lib/sceneUIData";
+import { useCurrentSceneIndex, useIsHovering, useIsPlayer, useSetCurrentSceneIndex } from "../../stores/SceneStore";
 
 export function KeyboardControls({ children }: { children: React.ReactNode }) {
   return (
@@ -22,11 +21,10 @@ export function KeyboardControls({ children }: { children: React.ReactNode }) {
 }
 
 function FKeyPressed() {
-  const { setCurrentSceneIndex, currentSceneIndex, isHovering } = useSceneStore(
-    (state) => state
-  );
-
-  const isPlayer = allScenesList[currentSceneIndex].isPlayer;
+  const setCurrentSceneIndex = useSetCurrentSceneIndex();
+  const isPlayer = useIsPlayer();
+  const currentSceneIndex = useCurrentSceneIndex();
+  const isHovering = useIsHovering();
 
   function handleKeyPress(e: KeyboardEvent) {
     if ((e.key === "f" || e.key === "F") && isPlayer && isHovering) {

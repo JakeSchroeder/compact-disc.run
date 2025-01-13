@@ -1,13 +1,11 @@
 import { PointerLockControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
+import { useIsPlayer, useSceneTitle } from "../../stores/SceneStore";
 
-export function PointerControls({
-  isPlayer,
-  pointerLockSelector,
-}: {
-  isPlayer: boolean | undefined;
-  pointerLockSelector: string | undefined;
-}) {
+export function PointerControls() {
+  const isPlayer = useIsPlayer();
+  const currentSceneTitle = useSceneTitle();
+
   const pointerControlsRef = useRef<any>(null);
   useEffect(() => {
     if (pointerControlsRef.current) {
@@ -24,7 +22,7 @@ export function PointerControls({
     <>
       <PointerLockControls
         ref={pointerControlsRef}
-        selector={!isPlayer && pointerLockSelector ? pointerLockSelector : undefined}
+        selector={!isPlayer && currentSceneTitle ? currentSceneTitle : undefined}
       />
     </>
   );

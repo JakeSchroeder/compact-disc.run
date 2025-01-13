@@ -1,12 +1,11 @@
-import { useGLTF } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import { KTX2Loader } from "three/examples/jsm/Addons.js";
-import { createRef, Fragment, useMemo, useRef, useState } from "react";
+import { createRef, Fragment, RefObject, useMemo, useRef, useState } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
 import { MacOS } from "./MacOS";
 import { ScreenSaver } from "./ScreenSaver";
+import { useCurrentSceneIndex, useSceneTitle, useSetIsHovering } from "../stores/SceneStore";
+import { useBaseSceneModel } from "./useBaseSceneModel";
 
 const htmlComponents = {
   screensaver: <ScreenSaver />,
@@ -14,22 +13,12 @@ const htmlComponents = {
   macos_decrypt: <MacOS sceneTitle="DECRYPT" />,
 };
 
-export function Artifacts({
-  currentSceneTitle,
-  setIsHovering,
-  currentSceneIndex,
-}: {
-  currentSceneTitle: string;
-  currentSceneIndex: number;
-  setIsHovering: (setIsHovering: boolean) => void;
-}) {
-  const { gl } = useThree();
+export function Artifacts() {
+  const currentSceneTitle = useSceneTitle();
+  const setIsHovering = useSetIsHovering();
+  const currentSceneIndex = useCurrentSceneIndex();
 
-  const { nodes, materials } = useGLTF("/models/scene-draco-ktx.glb", true, false, (loader) => {
-    const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
-    //@ts-ignore
-    loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
-  });
+  const { nodes, materials } = useBaseSceneModel();
 
   const nodeList = useMemo(
     () =>
@@ -45,7 +34,7 @@ export function Artifacts({
     [nodes, htmlComponents]
   );
 
-  const [currentHoveredArtifact, setCurrentHoveredArtifact] = useState();
+  const [currentHoveredArtifact, setCurrentHoveredArtifact] = useState<RefObject<any> | undefined>(undefined);
 
   return (
     <>
@@ -86,5 +75,3 @@ export function Artifacts({
     </>
   );
 }
-
-useGLTF.preload("models/scene-draco-ktx.glb");
