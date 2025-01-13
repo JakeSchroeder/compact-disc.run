@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { allScenesList, TScene } from "../lib/sceneUIData";
+import { allScenesList } from "../lib/sceneUIData";
 import { useMemo } from "react";
 
 interface ISceneState {
