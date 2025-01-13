@@ -1,8 +1,6 @@
-import { lazy } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { LoadingScreen } from "./components/LoadingScreen";
-
-const Game = lazy(() => import("./components/Game"));
+import { Game } from "./components/Game";
 
 function App() {
   return (

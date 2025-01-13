@@ -1,3 +1,4 @@
+import { useHudProps, useIsPlayer, useSceneTitle } from "../../stores/SceneStore";
 import { CrossHair } from "./CrossHair";
 import { EndScreenHUD } from "./EndScreenHUD";
 import { InventoryHUD } from "./InventoryHUD";
@@ -6,15 +7,11 @@ import { PlayerHUD } from "./PlayerHUD";
 import { StartScreenHUD } from "./StartScreenHUD";
 import { WASDInstructions } from "./WASDInstructions";
 
-export function HUDController({
-  hudProps,
-  currentSceneTitle,
-  isPlayer,
-}: {
-  hudProps: any;
-  currentSceneTitle: string;
-  isPlayer?: boolean;
-}) {
+export function HUDController() {
+  const hudProps = useHudProps();
+  const currentSceneTitle = useSceneTitle();
+  const isPlayer = useIsPlayer();
+
   return (
     <>
       {hudProps.type === "StartScreenHUD" && <StartScreenHUD {...hudProps} pointerLockSelector={currentSceneTitle} />}

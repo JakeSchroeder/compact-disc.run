@@ -19,57 +19,108 @@
     <meta name="twitter:description" content="A 3D Alternate Reality RPG Portfolio Escape Room">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image:src" content="https://compact-disc.run/og-image.png">
-    
-    <!-- <link rel="preload" type="image" /> -->
+    <link rel="preload" href="/os/project-x-os-wallpaper.jpg" as="image">
+    <link rel="preload" href="/os/project-x-os-wallpaper.jpg" as="image">
+    <link rel="preload" href="/images/diary-bg.png" as="image">
+    <link rel="preload" href="/images/diary.jpg" as="image">
     <style>
-     body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-    }
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+      }
 
-    body {
-      overflow: hidden;
-    }
+      body {
+        overflow: hidden;
+      }
 
-    *, *::after, *::before {
-      box-sizing: border-box;
-      border-width: 0;
-      border-style: solid;
-    }
-
+      *, *::after, *::before {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+      }
     </style>
   </head>
   <body>
     <!-- START initial loading screen before js loads -->
-    <div id="loading-screen" style="font-display: swap; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background: black; z-index: 999; position: absolute; top: 0; bottom: 0; left: 0; right: 0; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; gap: 40px;">
-      <div style="display: flex; flex-direction: column; align-items: center; font-size: 28px;">
-        <blockquote style="text-align: center; line-height: 44px; max-width: 52ch; margin: 28px 40px;">
-          “Humans on planet earth used to enjoy walking up to their desks.
-          Sitting down for prolonged periods of time. Surfing the so-called
-          inter-webs. However, around the mid 2000s the enjoyment turned to
-          stress and fatigue. Historians chalk it up to many tangentially
-          related things.”
-        </blockquote>
-        <div style="font-size: 20px; color: rgba(255, 255, 255, 0.7); line-height: 20px;">
-          - Tired Magazine (2024)
-        </div>
+    <div id="loading-screen" style="
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+    background: black; 
+    position: relative; 
+    color: white; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    height: 100%; 
+    gap: 1.5rem;"
+  >
+  <div style="position: relative; display: flex;">
+    <div style="
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 48px;
+      background: radial-gradient(38.64% 38.64% at 50% 40.79%, #1D1D1D 0%, #000000 100%);
+    "></div>
+    <div style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+    ">
+      <img src="/images/cd-loading.png" width="400px" height="271px" />
+    </div>
+  </div>
+    <div style="
+      z-index: 10;
+      width: 100%; 
+      font-size: 0.75rem; 
+      line-height: 1rem; 
+      max-width: 32rem; 
+      display: flex; 
+      flex-direction: column; 
+      padding-top: 5rem; 
+      gap: 0.75rem;"
+    >
+      <h1 style="
+        font-size: 1.125rem; 
+        text-align: center; 
+        font-weight: normal; 
+        line-height: 1.75rem; 
+        margin: 0;"
+      >Jake's Compact Disc</h1>
+      <div style="
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;"
+      >
+        <div style="color: rgba(255, 255, 255, 0.7);">Loading...</div>
+        <div style="color: rgba(255, 255, 255, 0.35);">/path/to/path/to/that-one-really-cool-asset.zip</div>
       </div>
-      <div style="width: 100%; font-size: 12px; max-width: 512px; gap: 12px; padding-top: 64px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px;">
-          <div style="color: rgba(255, 255, 255, 0.7);">Loading...</div>
-          <div style="color: rgba(255, 255, 255, 0.35);">
-            /path/to/path/to/that-one-really-cool-asset.zip
-          </div>
-        </div>
-        <div style="position: relative; height: 32px; width: 100%; padding: 4px; border: 2px solid rgba(255, 255, 255, 0.55); border-radius: 2px; display: flex; align-items: center; gap: 8px;">
-          <div style="width: 2%; height: 100%; background-color: white; display: flex; align-items: center; justify-content: end;"></div>
-          <div style="font-size: 14px; font-weight: bold;">1%</div>
-        </div>
+      <div style="
+        position: relative; 
+        width: 100%; 
+        height: 2rem; 
+        padding: 0.25rem; 
+        border: 2px solid rgba(255, 255, 255, 0.55); 
+        border-radius: 0.125rem; 
+        display: flex; 
+        align-items: center; 
+        gap: 0.5rem;"
+      >
+        <div style="width: 2%; height: 100%; background-color: white; display: flex; align-items: center; justify-content: end;"></div>
+        <div style="font-size: 0.875rem; font-weight: 700;">1%</div>
       </div>
     </div>
+  </div>
     <!-- END initial loading screen before js loads -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

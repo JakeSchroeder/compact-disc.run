@@ -1,6 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { BaseSceneModel } from "./BaseSceneModel";
-import { useSceneStore } from "../stores/SceneStore";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
 import { Lights } from "./Lights";
@@ -10,38 +8,35 @@ import { KeyboardControls } from "./Controls/KeyboardControls";
 import { PointerControls } from "./Controls/PointerControls";
 import { HUDController } from "./HUD/HUDController";
 import { CameraController } from "./CameraController";
-import { allScenesList } from "../lib/sceneUIData";
 import { SoundController } from "./SoundController";
 import { PerformanceMonitor } from "@react-three/drei";
 import { Suspense, useEffect, useState } from "react";
 import { LoadingManager } from "./LoadingManager";
+import { useLoadingStore } from "../stores/LoadingStore";
+import { Perf } from "r3f-perf";
 
-export default function Game() {
-  const { currentSceneIndex, setIsHovering, shouldPlaySound, setSceneLoading } = useSceneStore((state) => state);
-  const { hudProps, cameraProps, isPlayer, title: currentSceneTitle } = allScenesList[currentSceneIndex];
+const ENV_SETTING: "PROD" | "DEBUG" = "PROD";
+
+export function Game() {
   const [viewDPR, setViewDPR] = useState(1);
   return (
     <div id="canvas-container" className="w-full h-full relative hidden lg:block">
       <KeyboardControls>
-        <HUDController hudProps={hudProps} currentSceneTitle={currentSceneTitle} isPlayer={isPlayer} />
-        {shouldPlaySound && <SoundController />}
+        <HUDController />
+        <SoundController />
         <Canvas dpr={viewDPR} frameloop="demand" className="w-full h-full relative">
           <LoadingManager />
           <Suspense fallback={null}>
-            <DoneLoading setSceneLoading={setSceneLoading} />
+            <DoneLoading />
             <PerformanceMonitor onChange={({ factor }) => setViewDPR(Math.round(0.5 + 1.5 * factor))}>
               <EffectComposer autoClear={false}>
                 <PostProcessing />
-                <CameraController cameraProps={cameraProps} />
-                <Artifacts
-                  currentSceneTitle={currentSceneTitle}
-                  setIsHovering={setIsHovering}
-                  currentSceneIndex={currentSceneIndex}
-                />
-                <Player isPlayer={isPlayer} />
-                <BaseSceneModel />
-                <PointerControls isPlayer={isPlayer} pointerLockSelector={currentSceneTitle} />
+                <CameraController />
+                <Artifacts />
+                <Player />
+                <PointerControls />
                 <Lights />
+                {ENV_SETTING === "DEBUG" ? <Perf /> : <></>}
               </EffectComposer>
             </PerformanceMonitor>
           </Suspense>
@@ -51,11 +46,15 @@ export default function Game() {
   );
 }
 
-function DoneLoading({ setSceneLoading }: { setSceneLoading: (sceneLoading: any) => void }) {
+function DoneLoading() {
+  const setSceneLoading = useLoadingStore((state) => state.setSceneLoading);
+
   useEffect(() => {
-    setSceneLoading({
-      isLoading: false,
-    });
-  }, []);
+    setTimeout(() => {
+      setSceneLoading({
+        isLoading: false,
+      });
+    }, 2000);
+  }, [setSceneLoading]);
   return <></>;
 }

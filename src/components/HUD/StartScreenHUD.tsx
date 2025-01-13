@@ -1,6 +1,6 @@
 import { useSceneStore } from "../../stores/SceneStore";
 import logo from "../../assets/svg/logo.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export function StartScreenHUD({ pointerLockSelector }: { pointerLockSelector: string }) {
   return (
     <div id={pointerLockSelector} className="absolute inset-0 w-full h-full z-50">
@@ -8,7 +8,7 @@ export function StartScreenHUD({ pointerLockSelector }: { pointerLockSelector: s
         <div className="p-8 bg-black">
           <img src={logo} alt="logo" className="w-full h-40" />
         </div>
-        <div className="overflow-y-scroll scrollbar scrollbar-thumb-black scrollbar-track-[#ffffff10] h-full">
+        <div className="overflow-y-scroll scrollbar scrollbar-thumb-white scrollbar-track-[#ffffff10] h-full">
           {/* // TODO: need to figure out overscroll issue */}
           <div className="p-8 space-y-8">
             <div className="space-y-2">
@@ -47,26 +47,59 @@ export function StartScreenHUD({ pointerLockSelector }: { pointerLockSelector: s
         </div>
       </div>
       <div
-        className={`right-8 text-[#666] text-right whitespace-pre-wrap h-auto py-4 px-8  bg-black bg-opacity-70 top-8 absolute  text-sm  z-10`}
+        className={`w-[370px] right-8 text-[#666] text-right h-auto py-4 px-8  bg-black bg-opacity-70 top-8 absolute text-sm  z-10`}
       >
-        {`The mind restlessly awaits. \n Sooth thyself and cherish the day.`}
+        <QuoteSwitcher />
       </div>
       <PlayMenu />
       <p className="text-center absolute bottom-8 left-1/2 -translate-x-1/2 text-xs text-white text-opacity-30">
         Version 1.111111111111111 (random-hash-thing-token-build-id)
         <br />
-        Copyright © 2024 Jake Schroeder. All rights reserved.
+        Copyright © {new Date().getUTCFullYear()} Jake Schroeder. All rights reserved.
       </p>
     </div>
   );
 }
 
+const quotes = [
+  "The mind restlessly awaits. \n Sooth thyself and cherish the day.",
+  "The spirit humbly kneels.\nLift thy voice and bless Him.",
+  "The vessel endures storms.\nGuide thy course and heed wisdom.",
+  "The pilgrim journeys forth.\nTrust thy heart and conquer doubt.",
+  "The steward awaits dawn.\nServe thy brother and find peace.",
+];
+
+const QuoteSwitcher = () => {
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setQuoteIndex((prev) => (prev + 1) % quotes.length);
+        setIsVisible(true);
+      }, 700);
+    }, 5700);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  return (
+    <p className={`duration-700 transition-opacity whitespace-pre-line ${isVisible ? "opacity-100" : "opacity-0"}`}>
+      {quotes[quoteIndex]}
+    </p>
+  );
+};
+
 function PlayMenu() {
   const { setCurrentSceneIndex, setShouldPlaySound } = useSceneStore((state) => state);
 
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const [isCreditsOn, setIsCreditsOn] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isHintsOn, setIsHintsOn] = useState(true);
 
   return (
     <div className="flex flex-col w-[380px] absolute right-8 bottom-8  bg-black bg-opacity-70 z-10">
@@ -98,13 +131,13 @@ function PlayMenu() {
           <div className="flex">
             <input
               onChange={(e) => {
-                setIsCreditsOn(e.currentTarget.checked);
+                setIsHintsOn(e.currentTarget.checked);
               }}
-              checked={isCreditsOn}
+              checked={isHintsOn}
               type="checkbox"
               className="mr-2"
             />
-            <label>Show credits? {isCreditsOn ? "[Yes]" : "[No]"}</label>
+            <label>Show hints? {isHintsOn ? "[Yes]" : "[No]"}</label>
           </div>
         </div>
       </div>
