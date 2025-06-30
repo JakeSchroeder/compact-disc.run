@@ -22,6 +22,30 @@ export const allScenesList: TScene[] = [
     isPlayer: false,
   },
   {
+    title: "INSTRUCTIONS",
+    hudProps: {
+      dialogueBtnText: "EXIT Read me",
+      type: "InstructionsHUD",
+    },
+    cameraProps: {
+      type: "INSTRUCTIONS",
+    },
+    isPlayer: false,
+  },
+  {
+    title: "FREE_WALK",
+    hudProps: {
+      type: "PlayerHUD",
+      dialogueText: "Objective: Take a look around.",
+      dialogueHoverText: "Press F to interact [PC]",
+    },
+    cameraProps: {
+      type: "PLAYER",
+    },
+    isPlayer: true,
+    model: "pc",
+  },
+  {
     title: "INTRO",
     hudProps: {
       type: "PlayerHUD",

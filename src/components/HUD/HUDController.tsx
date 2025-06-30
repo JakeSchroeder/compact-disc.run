@@ -1,6 +1,7 @@
 import { useHudProps, useIsPlayer, useSceneTitle } from "../../stores/SceneStore";
 import { CrossHair } from "./CrossHair";
 import { EndScreenHUD } from "./EndScreenHUD";
+import { InstructionsHUD } from "./InstructionsHUD";
 import { InventoryHUD } from "./InventoryHUD";
 import { KeypadHUD } from "./KeypadHUD";
 import { PlayerHUD } from "./PlayerHUD";
@@ -12,7 +13,7 @@ export function HUDController() {
   const currentSceneTitle = useSceneTitle();
   const isPlayer = useIsPlayer();
 
-  return (
+  return hudProps !== null ? (
     <>
       {hudProps.type === "StartScreenHUD" && <StartScreenHUD {...hudProps} pointerLockSelector={currentSceneTitle} />}
       {hudProps.type === "PlayerHUD" && (
@@ -23,8 +24,11 @@ export function HUDController() {
         </>
       )}
       {hudProps.type === "InventoryHUD" && <InventoryHUD hudProps={hudProps} pointerLockSelector={currentSceneTitle} />}
+      {hudProps.type === "InstructionsHUD" && (
+        <InstructionsHUD hudProps={hudProps} pointerLockSelector={currentSceneTitle} />
+      )}
       {hudProps.type === "KeypadHUD" && <KeypadHUD pointerLockSelector={currentSceneTitle} />}
       {hudProps.type === "EndScreenHUD" && <EndScreenHUD pointerLockSelector={currentSceneTitle} />}
     </>
-  );
+  ) : null;
 }

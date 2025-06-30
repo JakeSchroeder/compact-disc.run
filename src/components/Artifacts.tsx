@@ -1,13 +1,12 @@
-import { createRef, Fragment, RefObject, useMemo, useState } from "react";
+import { createRef, Fragment, RefObject, useMemo, useState, useCallback, memo } from "react";
 import { Outline } from "@react-three/postprocessing";
 import { BlendFunction, KernelSize } from "postprocessing";
 import { allScenesList } from "../lib/sceneUIData";
 import { MacOS } from "./MacOS";
 import { ScreenSaver } from "./ScreenSaver";
-import { useCurrentSceneIndex, useSceneTitle, useSetIsHovering } from "../stores/SceneStore";
+import { useCurrentSceneIndex, useIsPlayer, useSceneTitle, useSetIsHovering } from "../stores/SceneStore";
 import { useGLTF } from "@react-three/drei";
-import { KTX2Loader } from "three/examples/jsm/Addons.js";
-import { useThree } from "@react-three/fiber";
+import { useLoadingStore } from "../stores/LoadingStore";
 
 const htmlComponents = {
   screensaver: <ScreenSaver />,
@@ -15,34 +14,58 @@ const htmlComponents = {
   macos_decrypt: <MacOS sceneTitle="DECRYPT" />,
 };
 
-export function Artifacts() {
+// Memoized mesh component to prevent unnecessary re-renders
+const ArtifactMesh = memo(({ node, materials, currentSceneIndex, onPointerOver, onPointerLeave }: any) => (
+  <mesh
+    visible={node.modelName === "diary" && currentSceneIndex > 4 ? false : true}
+    ref={node.ref}
+    geometry={node.geometry}
+    material={materials.environment}
+    onPointerOver={onPointerOver}
+    onPointerLeave={onPointerLeave}
+  />
+));
+
+export const Artifacts = memo(() => {
   const currentSceneTitle = useSceneTitle();
   const setIsHovering = useSetIsHovering();
   const currentSceneIndex = useCurrentSceneIndex();
+  const isPlayer = useIsPlayer();
+  const sceneLoading = useLoadingStore((state) => state.sceneLoading);
 
-  const { gl } = useThree();
-
-  const { nodes, materials } = useGLTF("/models/scene-draco-ktx.glb", true, false, (loader) => {
-    const ktx2Loader = new KTX2Loader().setTranscoderPath(`/compression/`);
-    //@ts-ignore
-    loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
-  });
+  const { nodes, materials } = useGLTF("/models/scene-draco.glb");
 
   const nodeList = useMemo(
     () =>
-      allScenesList.map((scene) => ({
+      allScenesList.map((scene, index) => ({
+        id: `${scene.title}-${index}`, // Add stable ID
         sceneTitle: scene.title,
         modelName: scene.model,
-        ref: createRef<any>(), // Create stable refs
+        ref: createRef<any>(),
         //@ts-ignore
-        geometry: scene.model && nodes[scene.model].geometry,
+        geometry: scene.model && nodes[scene.model]?.geometry,
         //@ts-ignore
         html: scene.html && htmlComponents[scene.html],
       })),
-    [nodes, htmlComponents]
+    [nodes]
   );
 
   const [currentHoveredArtifact, setCurrentHoveredArtifact] = useState<RefObject<any> | undefined>(undefined);
+
+  const handlePointerOver = useCallback(
+    (nodeRef: RefObject<any>, sceneTitle: string, hasHtml: boolean) => {
+      if (currentSceneTitle === sceneTitle && !hasHtml) {
+        setCurrentHoveredArtifact(nodeRef);
+        setIsHovering(true);
+      }
+    },
+    [currentSceneTitle, setIsHovering]
+  );
+
+  const handlePointerLeave = useCallback(() => {
+    setCurrentHoveredArtifact(undefined);
+    setIsHovering(false);
+  }, [setIsHovering]);
 
   const baseMesh = useMemo(
     () => (
@@ -50,46 +73,41 @@ export function Artifacts() {
         castShadow
         receiveShadow
         //@ts-ignore
-        geometry={nodes.base.geometry}
+        geometry={nodes.base?.geometry}
         material={materials.environment}
       />
     ),
     //@ts-ignore
-    [nodes.base.geometry, materials.environment]
+    [nodes.base?.geometry, materials.environment]
+  );
+
+  const outlineSelection = useMemo(
+    () => (!isPlayer ? undefined : currentHoveredArtifact),
+    [isPlayer, currentHoveredArtifact]
   );
 
   return (
     <>
       <Outline
-        selection={currentHoveredArtifact}
+        selection={outlineSelection}
         blendFunction={BlendFunction.SCREEN}
-        edgeStrength={20} // the edge strength
-        pulseSpeed={0.0} // a pulse speed. A value of zero disables the pulse effect
-        visibleEdgeColor={0xff2400} // the color of visible edges
-        kernelSize={KernelSize.LARGE} // blur kernel size
-        blur={false} // whether the outline should be blurred
-        xRay={false} // indicates whether X-Ray outlines are enabled
+        edgeStrength={20}
+        pulseSpeed={0.0}
+        visibleEdgeColor={0xff2400}
+        kernelSize={KernelSize.LARGE}
+        blur={false}
+        xRay={false}
       />
-      {nodeList.map((node, index) => (
-        <Fragment key={index}>
-          {node.html && currentSceneTitle === node.sceneTitle && node.html}
+      {nodeList.map((node) => (
+        <Fragment key={node.id}>
+          {node.html && currentSceneTitle === node.sceneTitle && !sceneLoading.isLoading && node.html}
           {node.geometry && (
-            <mesh
-              visible={node.modelName === "diary" && currentSceneIndex > 2 ? false : true}
-              ref={node.ref}
-              //@ts-ignore
-              geometry={node.geometry}
-              material={materials.environment}
-              onPointerOver={() => {
-                if (currentSceneTitle === node.sceneTitle && !node.html) {
-                  setCurrentHoveredArtifact(node.ref);
-                  setIsHovering(true);
-                }
-              }}
-              onPointerLeave={() => {
-                setCurrentHoveredArtifact(undefined);
-                setIsHovering(false);
-              }}
+            <ArtifactMesh
+              node={node}
+              materials={materials}
+              currentSceneIndex={currentSceneIndex}
+              onPointerOver={() => handlePointerOver(node.ref, node.sceneTitle, !!node.html)}
+              onPointerLeave={handlePointerLeave}
             />
           )}
         </Fragment>
@@ -97,4 +115,4 @@ export function Artifacts() {
       {baseMesh}
     </>
   );
-}
+});

@@ -34,7 +34,6 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
   });
 
   const [isDecrypt, setIsDecrypt] = useState(false);
-
   const [showDecryptPopup, setShowDecryptPopup] = useState(false);
   const [showKeyPadPin, setShowKeyPadPin] = useState(false);
 
@@ -188,10 +187,10 @@ export function MacOS({ sceneTitle }: { sceneTitle: string }) {
                 >
                   <label>Enter Password (numbers only)</label>
                   <input
-                    type="number"
+                    type="text"
                     className="w-full h-10 border border-dotted border-black"
                     onChange={(e) => {
-                      if (Number.parseInt(e.target.value) === 2001200220042008200920102013201420152016201720182022) {
+                      if (e.target.value === "2001200220042008200920102013201420152016201720182022") {
                         setIsDecrypt(true);
                       }
                     }}
