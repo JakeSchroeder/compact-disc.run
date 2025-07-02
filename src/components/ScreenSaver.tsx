@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 
 export function ScreenSaver() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -7,13 +7,6 @@ export function ScreenSaver() {
   const setPlayBack = () => {
     videoRef.current!.playbackRate = 0.5;
   };
-
-  // Compensate for device pixel ratio differences between laptop/external monitor
-  const adjustedDistanceFactor = useMemo(() => {
-    const dpr = window.devicePixelRatio || 1;
-    // Base factor adjusted for DPR - this may need tweaking
-    return 0.32 / dpr;
-  }, []);
 
   return (
     <Html
