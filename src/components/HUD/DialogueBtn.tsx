@@ -1,4 +1,4 @@
-import { useSceneStore } from "../../stores/SceneStore";
+import { useCurrentSceneIndex, useSetCurrentSceneIndex } from "../../stores/SceneStore";
 import backIcon from "../../assets/svg/back.svg";
 
 export function DialogueBtn({
@@ -8,11 +8,12 @@ export function DialogueBtn({
   pointerLockSelector?: string | undefined;
   text: string | undefined;
 }) {
-  const { currentSceneIndex, setCurrentSceneIndex } = useSceneStore((state) => state);
+  const currentSceneIndex = useCurrentSceneIndex();
+  const setCurrentSceneIndex = useSetCurrentSceneIndex();
   return (
-    <div id={pointerLockSelector} className="absolute top-8 left-8 z-10 text-white z-50">
+    <div id={pointerLockSelector} className="absolute bottom-16 right-16  text-white z-50">
       <button
-        className="text-sm py-4 px-8 bg-black bg-opacity-70 flex items-center space-x-4"
+        className="text-sm py-4 px-8 bg-red-700 bg-opacity-70 flex items-center space-x-4"
         onClick={() => {
           setCurrentSceneIndex(currentSceneIndex + 1);
         }}
