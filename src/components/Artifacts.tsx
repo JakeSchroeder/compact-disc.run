@@ -50,8 +50,6 @@ export const Artifacts = memo(() => {
     [nodes]
   );
 
-  console.log(nodeList);
-
   const [currentHoveredArtifact, setCurrentHoveredArtifact] = useState<RefObject<any> | undefined>(undefined);
 
   const handlePointerOver = useCallback(
