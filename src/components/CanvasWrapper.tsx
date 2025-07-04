@@ -6,8 +6,6 @@ type Props = {
   canvasProps?: CanvasProps;
 };
 
-const even = (n: number) => n & ~1;
-
 const CanvasWrapper: FC<Props> = ({ children, canvasProps = {} }) => {
   const containerRef = useRef<HTMLDivElement>(null!);
   const [size, setSize] = useState({ width: 0, height: 0 });
