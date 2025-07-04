@@ -14,19 +14,9 @@ export function ScreenSaver() {
       distanceFactor={0.32}
       position={[-1.767, 1.22, -1.751]}
       rotation={[-0.228, 0.772, 0.16]}
-      className="pointer-events-none"
+      className="pointer-events-none "
     >
-      <div
-        className="overflow-hidden"
-        style={{
-          width: "780px",
-          height: "550px",
-          // Force consistent rendering regardless of DPR
-          imageRendering: "pixelated",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-        }}
-      >
+      <div className="relative" style={{ width: 780, height: 550, backfaceVisibility: "hidden" }}>
         <video
           ref={videoRef}
           onCanPlay={setPlayBack}
@@ -34,7 +24,7 @@ export function ScreenSaver() {
           loop
           muted
           src="./videos/screen-saver.mp4"
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          className="absolute inset-0 w-full h-full opacity-50"
         />
       </div>
     </Html>

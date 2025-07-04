@@ -1,4 +1,3 @@
-import { Canvas } from "@react-three/fiber";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
 import { Lights } from "./Lights";
@@ -14,6 +13,7 @@ import { Suspense, useEffect, useState, useCallback, useMemo, memo } from "react
 import { LoadingManager } from "./LoadingManager";
 import { useLoadingStore } from "../stores/LoadingStore";
 import { Perf } from "r3f-perf";
+import { CanvasWrapper } from "./CanvasWrapper";
 
 const ENV_SETTING: "PROD" | "DEBUG" = "PROD";
 
@@ -81,7 +81,7 @@ export function Game() {
       <KeyboardControls>
         <HUDController />
         <SoundController />
-        <Canvas {...canvasProps}>
+        <CanvasWrapper {...canvasProps}>
           <LoadingManager />
           <Suspense fallback={null}>
             <PerformanceMonitor onChange={handlePerformanceChange}>
@@ -91,7 +91,7 @@ export function Game() {
               </EffectComposer>
             </PerformanceMonitor>
           </Suspense>
-        </Canvas>
+        </CanvasWrapper>
       </KeyboardControls>
     </div>
   );
