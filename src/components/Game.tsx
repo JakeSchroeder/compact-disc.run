@@ -1,4 +1,3 @@
-import { Canvas } from "@react-three/fiber";
 import { Player } from "./Player";
 import { PostProcessing } from "./PostProcessing";
 import { Lights } from "./Lights";
